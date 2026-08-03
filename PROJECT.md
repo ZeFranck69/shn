@@ -1,0 +1,298 @@
+# PROJECT.md — lddp
+
+Ce fichier décrit le projet courant.
+
+Il sert de contexte à l'équipe et à Codex. Il doit être court, concret et mis à
+jour quand une décision importante change.
+
+À faire au démarrage :
+
+1. copier ce fichier vers `PROJECT.md` ;
+2. remplacer `lddp` par le nom du projet ;
+3. compléter les sections utiles ;
+4. supprimer les exemples qui ne s'appliquent pas.
+
+Ne jamais mettre ici :
+
+- mot de passe ;
+- clé API ;
+- clé SSH privée ;
+- token ;
+- accès SMTP ;
+- accès WordPress réel ;
+- information client confidentielle non nécessaire au développement.
+
+## 1. Présentation
+
+Décrire le projet en quelques lignes.
+
+Exemple :
+
+```text
+Client : Noumea Resort
+Objectif : créer un site vitrine WordPress administrable pour présenter l'hôtel,
+les chambres, les services et les demandes de contact.
+Type de site : site vitrine
+Date de démarrage : 2026-07-28
+```
+
+À compléter :
+
+- Client :
+- Objectif du site :
+- Type de site :
+- Date de démarrage :
+
+## 2. Environnements
+
+Indiquer uniquement les URLs et chemins utiles au développement. Ne pas mettre de
+mot de passe.
+
+Exemple :
+
+```text
+Local :
+  URL : https://nom-projet.ddev.site
+  Nom DDEV : nom-projet
+Développement :
+  URL : https://nom-projet.dev.example.com
+  Hébergeur : cPanel / autre
+  Chemin WordPress : /home/user/public_html
+Production :
+  URL : https://www.nom-projet.nc
+  Hébergeur : à définir
+  Chemin WordPress : à définir
+```
+
+À compléter :
+
+- Local :
+  - URL :
+  - Nom DDEV :
+- Développement :
+  - URL :
+  - Hébergeur :
+  - Chemin WordPress :
+- Production :
+  - URL :
+  - Hébergeur :
+  - Chemin WordPress :
+
+## 3. Stack retenue
+
+Garder les valeurs par défaut sauf décision projet contraire.
+
+Exemple :
+
+```text
+WordPress : dernière version stable installée via WP-CLI
+PHP : 8.3
+MySQL/MariaDB : MySQL 8.0 via DDEV
+DDEV : oui
+Thème custom : tealforge
+Templating : Timber 2 / Twig
+Champs : ACF Pro
+Formulaires : WPForms
+Build front-end : Vite
+```
+
+À compléter :
+
+- WordPress :
+- PHP :
+- MySQL/MariaDB :
+- DDEV :
+- Thème custom : tealforge
+- Templating : Timber 2 / Twig
+- Champs : ACF Pro
+- Formulaires : WPForms
+- Build front-end : Vite
+
+## 4. Plugins WordPress
+
+Cocher les plugins installés et préciser les réglages sensibles sans secret.
+
+Plugins de socle :
+
+- [ ] ACF Pro
+- [ ] WPForms
+- [ ] WPvivid
+- [ ] WP-Optimize
+- [ ] Plugin de maintenance :
+- [ ] All-In-One Security / AIOS
+
+Plugins spécifiques projet :
+
+- [ ] À définir
+
+Licences ou comptes à demander au client, sans stocker de secret ici :
+
+- ACF Pro :
+- WPForms :
+- Autres :
+
+Réglages sensibles à documenter :
+
+- Cache :
+- Sécurité :
+- SMTP :
+- Sauvegardes :
+
+Exemple :
+
+```text
+Cache : WP-Optimize actif uniquement après validation visuelle.
+Sécurité : AIOS activé progressivement, REST API et admin-ajax à vérifier.
+SMTP : fournisseur à confirmer avec le client, secrets hors dépôt.
+Sauvegardes : WPvivid avant toute restauration ou déploiement.
+```
+
+## 5. Conventions projet
+
+Indiquer les conventions qui impactent le développement.
+
+Exemple :
+
+```text
+Slug du thème : tealforge
+Préfixe CSS : tf-
+Champs ACF principaux : page_sections
+Menus WordPress : primary, footer
+CPT prévus : chambre, offre
+Taxonomies prévues : type_chambre
+Templates spécifiques : page contact, archive chambres, single chambre
+```
+
+À compléter :
+
+- Slug du thème : tealforge
+- Préfixe CSS : tf-
+- Champs ACF principaux : page_sections
+- Menus WordPress :
+- CPT prévus :
+- Taxonomies prévues :
+- Templates spécifiques :
+
+## 6. Contenus et données
+
+Préciser d'où viennent les contenus et dans quel sens circulent les données.
+
+Exemple :
+
+```text
+Source de vérité du contenu : environnement de développement distant.
+Migration BDD :
+  Sens recommandé : dev/prod -> local
+  Outil : WPvivid
+  Dernier import local : 2026-07-28
+Médias : importés via WPvivid depuis le dev.
+Données externes/API : aucune au démarrage.
+Données de test nécessaires : 3 chambres, 3 offres, 1 page contact.
+Données à ne jamais écraser : utilisateurs client sur dev/prod.
+```
+
+À compléter :
+
+- Source de vérité du contenu :
+- Migration BDD :
+  - Sens recommandé :
+  - Outil :
+  - Dernier import local :
+- Médias :
+- Données externes/API :
+- Données de test nécessaires :
+- Données à ne jamais écraser :
+
+## 7. Déploiement
+
+Décrire la cible et la méthode. Les secrets restent hors dépôt.
+
+Exemple :
+
+```text
+Hébergeur : cPanel
+Accès SSH : oui, port spécifique fourni par l'hébergeur
+Chemin WordPress distant : /home/user/public_html
+Variables locales de déploiement : deploy.local.env
+Commande ou méthode de déploiement : bin/package-theme puis bin/deploy-theme
+Points de vérification après déploiement : manifest.json, CSS/JS 200, ACF JSON, caches
+Procédure de backup avant déploiement : WPvivid complet
+```
+
+À compléter :
+
+- Hébergeur :
+- Accès SSH :
+- Chemin WordPress distant :
+- Variables locales de déploiement : `deploy.local.env`
+- Commande ou méthode de déploiement :
+- Points de vérification après déploiement :
+- Procédure de backup avant déploiement :
+
+## 8. Workflow projet
+
+Clarifier qui fait quoi.
+
+Exemple :
+
+```text
+Qui installe WordPress : François
+Qui installe les plugins tiers : François
+Qui importe la BDD : François, après backup
+Qui déploie le thème : François
+Qui valide visuellement : client + Tealforge
+Environnement source de vérité pour le contenu : dev/prod selon phase projet
+```
+
+À compléter :
+
+- Qui installe WordPress :
+- Qui installe les plugins tiers :
+- Qui importe la BDD :
+- Qui déploie le thème :
+- Qui valide visuellement :
+- Environnement source de vérité pour le contenu :
+
+## 9. Points de vigilance
+
+Noter les risques connus ou décisions importantes.
+
+Exemple :
+
+```text
+Contraintes client : site administrable simplement, pas de dépendance lourde.
+Plugins sensibles : AIOS et WP-Optimize à activer progressivement.
+Sécurité : vérifier REST API, admin-ajax et accès manifest.json.
+Cache : vider après chaque déploiement thème.
+ACF JSON : synchroniser avant d'éditer les pages.
+WPForms : styles gérés côté thème, logique côté plugin.
+Permissions fichiers : 755 dossiers, 644 fichiers.
+Notes techniques : ne pas sauvegarder une page si les champs ACF manquent.
+```
+
+À compléter :
+
+- Contraintes client :
+- Plugins sensibles :
+- Sécurité :
+- Cache :
+- REST API / admin-ajax :
+- ACF JSON :
+- WPForms :
+- Permissions fichiers :
+- Notes techniques :
+
+## 10. Historique des décisions
+
+Ajouter les décisions structurantes avec une date.
+
+Exemple :
+
+```text
+- 2026-07-28 : le contenu de référence sera importé du dev vers le local avec WPvivid.
+- 2026-07-28 : les plugins spécifiques seront développés à part puis installés en ZIP.
+```
+
+À compléter :
+
+- YYYY-MM-DD :
