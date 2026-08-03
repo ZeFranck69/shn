@@ -1,10 +1,62 @@
 <footer class="tf-site-footer">
-    <div class="tf-site-footer__inner tf-container">
-        <p>&copy; {{ 'now'|date('Y') }} {{ site.name }}</p>
+    <div class="tf-container">
+        <div class="tf-site-footer__top">
+            <div>
+                <a class="tf-site-footer__brand" href="#accueil" aria-label="Le Domaine du Pacifique">
+                    {% if options.logo_footer %}
+                        <img
+                            class="tf-site-footer__logo"
+                            src="{{ options.logo_footer.url|e('html_attr') }}"
+                            alt="{{ options.logo_footer.alt ?: 'Le Domaine du Pacifique' }}"
+                        >
+                    {% else %}
+                        <span>Le Domaine</span>
+                        <small>du Pacifique</small>
+                    {% endif %}
+                </a>
+                <p>Resorts &amp; Expériences en Nouvelle-Calédonie. Une marque de la Société Hôtelière de Nouvelle-Calédonie.</p>
+            </div>
 
-        {% include 'components/menu.twig' with {
-            menu: menus.footer,
-            class_name: 'tf-menu tf-menu--footer'
-        } only %}
+            <div>
+                <h4>Hébergements</h4>
+                <ul>
+                    <li><a href="https://www.marriott.com/fr/hôtels/nousr-le-domaine-noumea-series/overview/" target="_blank" rel="noopener">Le Domaine Nouméa</a></li>
+                    <li><a href="https://www.marriott.com/fr/hôtels/noudr-le-domaine-deva-series/overview/" target="_blank" rel="noopener">Le Domaine Déva</a></li>
+                    <li><a href="https://www.residencedeva.nc" target="_blank" rel="noopener">La Résidence Déva</a></li>
+                    <li><a href="https://www.marriott.com/fr/hôtels/ilpse-le-domaine-oro-series/overview/" target="_blank" rel="noopener">Le Domaine Oro</a></li>
+                    <li><a href="https://www.ourelodge.nc/" target="_blank" rel="noopener">Le Domaine Kanuméra</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4>Expériences</h4>
+                <ul>
+                    <li><a href="https://www.ileauxcanards.nc/" target="_blank" rel="noopener">Île aux Canards</a></li>
+                    <li><a href="https://deepnature.nc/" target="_blank" rel="noopener">Deep Nature Spa</a></li>
+                    <li><a href="https://www.exclusivgolf-deva.com/" target="_blank" rel="noopener">Golf de Déva</a></li>
+                    <li><a href="https://www.gardengolf-dumbea.com/" target="_blank" rel="noopener">Golf de Dumbéa</a></li>
+                    <li><a href="https://casinodenoumea.nc/" target="_blank" rel="noopener">Casinos de Nouméa</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4>Le groupe</h4>
+                <ul>
+                    <li><a href="#groupe">Notre histoire</a></li>
+                    <li><a href="#destinations">Nos destinations</a></li>
+                    <li><a href="#contact">Nous contacter</a></li>
+                    <li><a href="#contact">Recrutement</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="tf-site-footer__bottom">
+            <p>&copy; {{ 'now'|date('Y') }} Le Domaine du Pacifique. Tous droits réservés.</p>
+            <nav aria-label="Liens légaux">
+                <a href="#">Mentions légales</a>
+                <a href="#">Politique de confidentialité</a>
+                <a href="#">Gestion des cookies</a>
+            </nav>
+        </div>
     </div>
 </footer>

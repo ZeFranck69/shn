@@ -1,0 +1,16 @@
+<section class="tf-section" id="{{ section.anchor_id|e('html_attr') }}">
+    <div class="tf-container">
+        <div class="tf-manifest">
+            <div class="tf-manifest__heading">
+                <p class="tf-eyebrow">{{ section.eyebrow }}</p>
+                <h2 class="tf-h2">{{ section.title|raw }}</h2>
+                <div class="tf-rule" aria-hidden="true"></div>
+            </div>
+
+            <div class="tf-manifest__text">
+                <p class="tf-lead">{{ section.lead|raw }}</p>
+                {{ section.content|raw }}
+            </div>
+        </div>
+    </div>
+</section>

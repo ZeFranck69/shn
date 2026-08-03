@@ -1,0 +1,36 @@
+<section class="tf-section tf-contact" id="{{ section.anchor_id|e('html_attr') }}">
+    <div class="tf-container">
+        <div class="tf-contact__grid">
+            <div>
+                <p class="tf-eyebrow">{{ section.eyebrow }}</p>
+                <h2 class="tf-h2">{{ section.title|raw }}</h2>
+                <div class="tf-rule" aria-hidden="true"></div>
+                <p class="tf-contact__intro">{{ section.intro|raw }}</p>
+
+                {% if section.infos %}
+                    <dl class="tf-contact__infos">
+                        {% for info in section.infos %}
+                            <dt>{{ info.label }}</dt>
+                            <dd>{{ info.value|raw }}</dd>
+                        {% endfor %}
+                    </dl>
+                {% endif %}
+            </div>
+
+            <div>
+                {% if section.wpforms_id %}
+                    {{ function('do_shortcode', '[wpforms id="' ~ section.wpforms_id ~ '"]') }}
+                {% else %}
+                    <div class="tf-form" aria-label="Formulaire de contact">
+                        <label>Nom et prenom<input type="text" autocomplete="name"></label>
+                        <label>E-mail<input type="email" autocomplete="email"></label>
+                        <label>Votre demande concerne<select><option>Un séjour dans l'un de nos établissements</option><option>Un evenement ou un séminaire</option><option>Une activite ou une expérience</option><option>Un partenariat</option><option>Autre demande</option></select></label>
+                        <label>Message<textarea></textarea></label>
+                        <label class="tf-form__consent"><input type="checkbox"> <span>J'accepte que mes données soient utilisées pour traiter ma demande, conformêment a la politique de confidentialité.</span></label>
+                        <a class="tf-btn" href="#contact">Envoyer ma demande <span aria-hidden="true">→</span></a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>

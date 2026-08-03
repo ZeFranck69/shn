@@ -1,0 +1,65 @@
+{
+    "key": "group_shn_site_options",
+    "title": "SHN - Options du site",
+    "fields": [
+        {
+            "key": "field_shn_logo_header_light",
+            "label": "Logo header clair",
+            "name": "logo_header_light",
+            "type": "image",
+            "instructions": "Logo blanc ou clair, utilisé sur le header transparent/fond sombre.",
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all"
+        },
+        {
+            "key": "field_shn_logo_header_dark",
+            "label": "Logo header foncé",
+            "name": "logo_header_dark",
+            "type": "image",
+            "instructions": "Logo foncé, utilisé quand le header passe sur fond blanc au scroll.",
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all"
+        },
+        {
+            "key": "field_shn_logo_hero",
+            "label": "Logo hero",
+            "name": "logo_hero",
+            "type": "image",
+            "instructions": "Grand logo centré dans le hero.",
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all"
+        },
+        {
+            "key": "field_shn_logo_footer",
+            "label": "Logo footer",
+            "name": "logo_footer",
+            "type": "image",
+            "instructions": "Logo utilisé dans le pied de page.",
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "tealforge-site-options"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1785720000
+}

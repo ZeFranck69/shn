@@ -1,0 +1,41 @@
+<section class="tf-hero" id="{{ section.anchor_id|e('html_attr') }}">
+    <div class="tf-hero__media">
+        {% include 'components/visual.twig' with {
+            image: section.background_image,
+            note: 'Visuel 01 - Vidéo ou photo pleine largeur : lagon calédonien en lumière naturelle, prèsence humaine discrète. 1920 x 1080 px minimum.',
+            dark: true
+        } only %}
+    </div>
+
+    <div class="tf-hero__content">
+        {% if options.logo_hero %}
+            <img
+                class="tf-hero__logo"
+                src="{{ options.logo_hero.url|e('html_attr') }}"
+                alt="{{ options.logo_hero.alt ?: 'Le Domaine du Pacifique' }}"
+            >
+        {% else %}
+            <span class="tf-brand-mark tf-brand-mark--large" aria-hidden="true"></span>
+        {% endif %}
+        <h1>{{ section.title|raw }}</h1>
+        <p>{{ section.subtitle|raw }}</p>
+
+        {% if section.buttons %}
+            <div class="tf-hero__actions">
+                {% for button in section.buttons %}
+                    <a
+                        class="tf-btn{% if button.style == 'light' %} tf-btn--light{% endif %}{% if button.style == 'ghost' %} tf-btn--ghost{% endif %}"
+                        href="{{ button.url|e('html_attr') }}"
+                        {% if button.target_blank %}target="_blank" rel="noopener"{% endif %}
+                    >
+                        {{ button.label }}{% if loop.first %}<span aria-hidden="true">→</span>{% endif %}
+                    </a>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <a class="tf-scroll-hint" href="{{ section.scroll_target|e('html_attr') }}">
+        {{ section.scroll_label }}<i aria-hidden="true"></i>
+    </a>
+</section>

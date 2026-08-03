@@ -1,22 +1,38 @@
+const initHeader = () => {
+  const header = document.querySelector('[data-tf-site-header]');
+
+  if (!header) {
+    return;
+  }
+
+  const sync = () => {
+    header.classList.toggle('is-scrolled', window.scrollY > 24);
+  };
+
+  sync();
+  window.addEventListener('scroll', sync, { passive: true });
+};
+
 const initMobileNavigation = () => {
-  const toggles = document.querySelectorAll('[data-tf-menu-toggle]');
+  const toggle = document.querySelector('[data-tf-menu-toggle]');
   const panel = document.querySelector('[data-tf-menu-panel]');
 
-  if (!toggles.length || !panel) {
+  if (!toggle || !panel) {
     return;
   }
 
   const setOpen = (isOpen) => {
-    document.documentElement.classList.toggle('tf-menu-is-open', isOpen);
-    toggles.forEach((toggle) => {
-      toggle.setAttribute('aria-expanded', String(isOpen));
-    });
+    document.body.classList.toggle('tf-menu-is-open', isOpen);
+    toggle.setAttribute('aria-expanded', String(isOpen));
+    toggle.setAttribute('aria-label', isOpen ? 'Fermer le menu' : 'Ouvrir le menu');
   };
 
-  toggles.forEach((toggle) => {
-    toggle.addEventListener('click', () => {
-      setOpen(!document.documentElement.classList.contains('tf-menu-is-open'));
-    });
+  toggle.addEventListener('click', () => {
+    setOpen(!document.body.classList.contains('tf-menu-is-open'));
+  });
+
+  panel.querySelectorAll('a[href^="#"]').forEach((link) => {
+    link.addEventListener('click', () => setOpen(false));
   });
 
   document.addEventListener('keydown', (event) => {
@@ -26,22 +42,35 @@ const initMobileNavigation = () => {
   });
 };
 
-const initHistoryBackButtons = () => {
-  const buttons = document.querySelectorAll('[data-tf-history-back]');
+const initReveal = () => {
+  const elements = document.querySelectorAll('.reveal');
 
-  buttons.forEach((button) => {
-    button.addEventListener('click', () => {
-      if (window.history.length > 1) {
-        window.history.back();
-        return;
-      }
+  if (!elements.length) {
+    return;
+  }
 
-      window.location.href = '/';
-    });
-  });
+  if (!('IntersectionObserver' in window)) {
+    elements.forEach((element) => element.classList.add('in'));
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.16 },
+  );
+
+  elements.forEach((element) => observer.observe(element));
 };
 
 document.addEventListener('DOMContentLoaded', () => {
+  initHeader();
   initMobileNavigation();
-  initHistoryBackButtons();
+  initReveal();
 });

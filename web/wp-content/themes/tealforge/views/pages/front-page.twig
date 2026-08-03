@@ -1,17 +1,13 @@
 {% extends 'layouts/base.twig' %}
 
 {% block content %}
-    <section class="tf-page-hero">
-        <div class="tf-page-hero__inner">
-            <h1 class="tf-page-hero__title">
-                {{ post.title ?: site.name }}
-            </h1>
-
-            {% if post.content %}
-                <div class="tf-page-hero__text">
-                    {{ post.content }}
-                </div>
-            {% endif %}
-        </div>
-    </section>
+    {% for section in sections %}
+        {% include 'sections/' ~ section.layout ~ '.twig' with { section: section, options: options } only %}
+    {% else %}
+        <section class="tf-content">
+            <div class="tf-content__inner">
+                <p>Aucune section n'est encore configuree.</p>
+            </div>
+        </section>
+    {% endfor %}
 {% endblock %}

@@ -1,0 +1,34 @@
+<section class="tf-section tf-assets" id="{{ section.anchor_id|e('html_attr') }}">
+    <div class="tf-container">
+        <header class="tf-section__header">
+            <p class="tf-eyebrow">{{ section.eyebrow }}</p>
+            <h2 class="tf-h2">{{ section.title|raw }}</h2>
+            <div class="tf-rule" aria-hidden="true"></div>
+            <p>{{ section.intro|raw }}</p>
+        </header>
+
+        {% for item in section.items %}
+            <article class="tf-asset reveal{% if item.reverse %} tf-asset--reverse{% endif %}">
+                <div class="tf-asset__media">
+                    {% include 'components/visual.twig' with {
+                        image: item.image,
+                        note: item.image_note,
+                        dark: false
+                    } only %}
+                </div>
+
+                <div class="tf-asset__body">
+                    <p class="tf-place">{{ item.place }}</p>
+                    <h3 class="tf-h3">{{ item.title }}</h3>
+                    <p class="tf-endorse">{{ item.endorsement }}</p>
+                    <p>{{ item.description|raw }}</p>
+                    {% if item.link_url and item.link_label %}
+                        <a class="tf-link" href="{{ item.link_url|e('html_attr') }}" {% if item.target_blank %}target="_blank" rel="noopener"{% endif %}>
+                            {{ item.link_label }} <span aria-hidden="true">→</span>
+                        </a>
+                    {% endif %}
+                </div>
+            </article>
+        {% endfor %}
+    </div>
+</section>

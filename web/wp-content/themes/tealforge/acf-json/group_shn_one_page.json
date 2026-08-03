@@ -1,0 +1,595 @@
+{
+  "key": "group_shn_one_page",
+  "title": "SHN - One page",
+  "fields": [
+    {
+      "key": "field_shn_page_sections",
+      "label": "Sections de la page",
+      "name": "page_sections",
+      "aria-label": "",
+      "type": "flexible_content",
+      "instructions": "",
+      "required": 0,
+      "conditional_logic": 0,
+      "wrapper": {
+        "width": "",
+        "class": "",
+        "id": ""
+      },
+      "layouts": {
+        "layout_shn_hero": {
+          "key": "layout_shn_hero",
+          "name": "hero",
+          "label": "Hero",
+          "display": "block",
+          "sub_fields": [
+            {
+              "key": "field_shn_hero_anchor_id",
+              "label": "Ancre",
+              "name": "anchor_id",
+              "type": "text",
+              "default_value": "accueil"
+            },
+            {
+              "key": "field_shn_hero_background_image",
+              "label": "Image de fond",
+              "name": "background_image",
+              "type": "image",
+              "return_format": "array",
+              "preview_size": "medium",
+              "library": "all"
+            },
+            {
+              "key": "field_shn_hero_title",
+              "label": "Titre",
+              "name": "title",
+              "type": "textarea",
+              "new_lines": "br"
+            },
+            {
+              "key": "field_shn_hero_subtitle",
+              "label": "Texte",
+              "name": "subtitle",
+              "type": "textarea",
+              "new_lines": "br"
+            },
+            {
+              "key": "field_shn_hero_buttons",
+              "label": "Boutons",
+              "name": "buttons",
+              "type": "repeater",
+              "layout": "table",
+              "button_label": "Ajouter un bouton",
+              "sub_fields": [
+                {
+                  "key": "field_shn_button_label",
+                  "label": "Libelle",
+                  "name": "label",
+                  "type": "text"
+                },
+                {
+                  "key": "field_shn_button_url",
+                  "label": "URL",
+                  "name": "url",
+                  "type": "text"
+                },
+                {
+                  "key": "field_shn_button_style",
+                  "label": "Style",
+                  "name": "style",
+                  "type": "select",
+                  "choices": {
+                    "primary": "Principal",
+                    "light": "Clair",
+                    "ghost": "Secondaire"
+                  },
+                  "default_value": "primary"
+                },
+                {
+                  "key": "field_shn_button_target_blank",
+                  "label": "Nouvel onglet",
+                  "name": "target_blank",
+                  "type": "true_false",
+                  "ui": 1
+                }
+              ]
+            },
+            {
+              "key": "field_shn_hero_scroll_label",
+              "label": "Libelle scroll",
+              "name": "scroll_label",
+              "type": "text",
+              "default_value": "Découvrir"
+            },
+            {
+              "key": "field_shn_hero_scroll_target",
+              "label": "Cible scroll",
+              "name": "scroll_target",
+              "type": "text",
+              "default_value": "#groupe"
+            }
+          ]
+        },
+        "layout_shn_manifest": {
+          "key": "layout_shn_manifest",
+          "name": "manifest",
+          "label": "Manifeste",
+          "display": "block",
+          "sub_fields": [
+            {
+              "key": "field_shn_manifest_anchor_id",
+              "label": "Ancre",
+              "name": "anchor_id",
+              "type": "text",
+              "default_value": "groupe"
+            },
+            {
+              "key": "field_shn_manifest_eyebrow",
+              "label": "Surtitre",
+              "name": "eyebrow",
+              "type": "text"
+            },
+            {
+              "key": "field_shn_manifest_title",
+              "label": "Titre",
+              "name": "title",
+              "type": "textarea",
+              "new_lines": "br"
+            },
+            {
+              "key": "field_shn_manifest_lead",
+              "label": "Chapo",
+              "name": "lead",
+              "type": "textarea",
+              "new_lines": "br"
+            },
+            {
+              "key": "field_shn_manifest_content",
+              "label": "Contenu",
+              "name": "content",
+              "type": "wysiwyg",
+              "tabs": "visual",
+              "toolbar": "basic",
+              "media_upload": 0
+            }
+          ]
+        },
+        "layout_shn_destinations": {
+          "key": "layout_shn_destinations",
+          "name": "destinations",
+          "label": "Destinations",
+          "display": "block",
+          "sub_fields": [
+            {
+              "key": "field_shn_destinations_anchor_id",
+              "label": "Ancre",
+              "name": "anchor_id",
+              "type": "text",
+              "default_value": "destinations"
+            },
+            {
+              "key": "field_shn_destinations_eyebrow",
+              "label": "Surtitre",
+              "name": "eyebrow",
+              "type": "text"
+            },
+            {
+              "key": "field_shn_destinations_title",
+              "label": "Titre",
+              "name": "title",
+              "type": "textarea",
+              "new_lines": "br"
+            },
+            {
+              "key": "field_shn_destinations_intro",
+              "label": "Introduction",
+              "name": "intro",
+              "type": "textarea",
+              "new_lines": "br"
+            },
+            {
+              "key": "field_shn_destinations_items",
+              "label": "Destinations",
+              "name": "items",
+              "type": "repeater",
+              "layout": "block",
+              "button_label": "Ajouter une destination",
+              "sub_fields": [
+                {
+                  "key": "field_shn_destination_index",
+                  "label": "Index",
+                  "name": "index",
+                  "type": "text"
+                },
+                {
+                  "key": "field_shn_destination_title",
+                  "label": "Titre",
+                  "name": "title",
+                  "type": "text"
+                },
+                {
+                  "key": "field_shn_destination_place",
+                  "label": "Lieu",
+                  "name": "place",
+                  "type": "text"
+                },
+                {
+                  "key": "field_shn_destination_links",
+                  "label": "Elements",
+                  "name": "links",
+                  "type": "repeater",
+                  "layout": "table",
+                  "button_label": "Ajouter un element",
+                  "sub_fields": [
+                    {
+                      "key": "field_shn_destination_link_label",
+                      "label": "Libelle",
+                      "name": "label",
+                      "type": "text"
+                    },
+                    {
+                      "key": "field_shn_destination_link_type",
+                      "label": "Type",
+                      "name": "type",
+                      "type": "select",
+                      "choices": {
+                        "accommodation": "Hebergement",
+                        "expérience": "Experience"
+                      },
+                      "default_value": "accommodation"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "layout_shn_accommodations": {
+          "key": "layout_shn_accommodations",
+          "name": "accommodations",
+          "label": "Hébergements",
+          "display": "block",
+          "sub_fields": [
+            {
+              "key": "field_shn_accommodations_anchor_id",
+              "label": "Ancre",
+              "name": "anchor_id",
+              "type": "text",
+              "default_value": "hebergements"
+            },
+            {
+              "key": "field_shn_accommodations_eyebrow",
+              "label": "Surtitre",
+              "name": "eyebrow",
+              "type": "text"
+            },
+            {
+              "key": "field_shn_accommodations_title",
+              "label": "Titre",
+              "name": "title",
+              "type": "textarea",
+              "new_lines": "br"
+            },
+            {
+              "key": "field_shn_accommodations_intro",
+              "label": "Introduction",
+              "name": "intro",
+              "type": "textarea",
+              "new_lines": "br"
+            },
+            {
+              "key": "field_shn_accommodations_items",
+              "label": "Hébergements",
+              "name": "items",
+              "type": "repeater",
+              "layout": "block",
+              "button_label": "Ajouter un hébergement",
+              "sub_fields": [
+                {
+                  "key": "field_shn_accommodation_image",
+                  "label": "Image",
+                  "name": "image",
+                  "type": "image",
+                  "return_format": "array",
+                  "preview_size": "medium",
+                  "library": "all"
+                },
+                {
+                  "key": "field_shn_accommodation_image_note",
+                  "label": "Note visuel",
+                  "name": "image_note",
+                  "type": "text"
+                },
+                {
+                  "key": "field_shn_accommodation_place",
+                  "label": "Lieu",
+                  "name": "place",
+                  "type": "text"
+                },
+                {
+                  "key": "field_shn_accommodation_title",
+                  "label": "Titre",
+                  "name": "title",
+                  "type": "text"
+                },
+                {
+                  "key": "field_shn_accommodation_endorsement",
+                  "label": "Signature",
+                  "name": "endorsement",
+                  "type": "text"
+                },
+                {
+                  "key": "field_shn_accommodation_description",
+                  "label": "Description",
+                  "name": "description",
+                  "type": "textarea",
+                  "new_lines": "br"
+                },
+                {
+                  "key": "field_shn_accommodation_link_label",
+                  "label": "Libelle lien",
+                  "name": "link_label",
+                  "type": "text"
+                },
+                {
+                  "key": "field_shn_accommodation_link_url",
+                  "label": "URL lien",
+                  "name": "link_url",
+                  "type": "url"
+                },
+                {
+                  "key": "field_shn_accommodation_target_blank",
+                  "label": "Nouvel onglet",
+                  "name": "target_blank",
+                  "type": "true_false",
+                  "ui": 1,
+                  "default_value": 1
+                }
+              ]
+            }
+          ]
+        },
+        "layout_shn_quote": {
+          "key": "layout_shn_quote",
+          "name": "quote",
+          "label": "Citation",
+          "display": "block",
+          "sub_fields": [
+            {
+              "key": "field_shn_quote_text",
+              "label": "Citation",
+              "name": "quote",
+              "type": "textarea",
+              "new_lines": "br"
+            },
+            {
+              "key": "field_shn_quote_attribution",
+              "label": "Attribution",
+              "name": "attribution",
+              "type": "text"
+            }
+          ]
+        },
+        "layout_shn_experiences": {
+          "key": "layout_shn_experiences",
+          "name": "experiences",
+          "label": "Expériences",
+          "display": "block",
+          "sub_fields": [
+            {
+              "key": "field_shn_expériences_anchor_id",
+              "label": "Ancre",
+              "name": "anchor_id",
+              "type": "text",
+              "default_value": "experiences"
+            },
+            {
+              "key": "field_shn_expériences_eyebrow",
+              "label": "Surtitre",
+              "name": "eyebrow",
+              "type": "text"
+            },
+            {
+              "key": "field_shn_expériences_title",
+              "label": "Titre",
+              "name": "title",
+              "type": "textarea",
+              "new_lines": "br"
+            },
+            {
+              "key": "field_shn_expériences_intro",
+              "label": "Introduction",
+              "name": "intro",
+              "type": "textarea",
+              "new_lines": "br"
+            },
+            {
+              "key": "field_shn_expériences_items",
+              "label": "Expériences",
+              "name": "items",
+              "type": "repeater",
+              "layout": "block",
+              "button_label": "Ajouter une expérience",
+              "sub_fields": [
+                {
+                  "key": "field_shn_expérience_image",
+                  "label": "Image",
+                  "name": "image",
+                  "type": "image",
+                  "return_format": "array",
+                  "preview_size": "medium",
+                  "library": "all"
+                },
+                {
+                  "key": "field_shn_expérience_image_note",
+                  "label": "Note visuel",
+                  "name": "image_note",
+                  "type": "text"
+                },
+                {
+                  "key": "field_shn_expérience_place",
+                  "label": "Lieu",
+                  "name": "place",
+                  "type": "text"
+                },
+                {
+                  "key": "field_shn_expérience_title",
+                  "label": "Titre",
+                  "name": "title",
+                  "type": "text"
+                },
+                {
+                  "key": "field_shn_expérience_endorsement",
+                  "label": "Signature",
+                  "name": "endorsement",
+                  "type": "text"
+                },
+                {
+                  "key": "field_shn_expérience_description",
+                  "label": "Description",
+                  "name": "description",
+                  "type": "textarea",
+                  "new_lines": "br"
+                },
+                {
+                  "key": "field_shn_expérience_link_label",
+                  "label": "Libelle lien",
+                  "name": "link_label",
+                  "type": "text"
+                },
+                {
+                  "key": "field_shn_expérience_link_url",
+                  "label": "URL lien",
+                  "name": "link_url",
+                  "type": "url"
+                },
+                {
+                  "key": "field_shn_expérience_target_blank",
+                  "label": "Nouvel onglet",
+                  "name": "target_blank",
+                  "type": "true_false",
+                  "ui": 1,
+                  "default_value": 1
+                }
+              ]
+            },
+            {
+              "key": "field_shn_expériences_cta_title",
+              "label": "Titre CTA",
+              "name": "cta_title",
+              "type": "text"
+            },
+            {
+              "key": "field_shn_expériences_cta_text",
+              "label": "Texte CTA",
+              "name": "cta_text",
+              "type": "textarea",
+              "new_lines": "br"
+            },
+            {
+              "key": "field_shn_expériences_cta_button_label",
+              "label": "Libelle bouton CTA",
+              "name": "cta_button_label",
+              "type": "text"
+            },
+            {
+              "key": "field_shn_expériences_cta_button_url",
+              "label": "URL bouton CTA",
+              "name": "cta_button_url",
+              "type": "text",
+              "default_value": "#contact"
+            }
+          ]
+        },
+        "layout_shn_contact": {
+          "key": "layout_shn_contact",
+          "name": "contact",
+          "label": "Contact",
+          "display": "block",
+          "sub_fields": [
+            {
+              "key": "field_shn_contact_anchor_id",
+              "label": "Ancre",
+              "name": "anchor_id",
+              "type": "text",
+              "default_value": "contact"
+            },
+            {
+              "key": "field_shn_contact_eyebrow",
+              "label": "Surtitre",
+              "name": "eyebrow",
+              "type": "text"
+            },
+            {
+              "key": "field_shn_contact_title",
+              "label": "Titre",
+              "name": "title",
+              "type": "textarea",
+              "new_lines": "br"
+            },
+            {
+              "key": "field_shn_contact_intro",
+              "label": "Introduction",
+              "name": "intro",
+              "type": "textarea",
+              "new_lines": "br"
+            },
+            {
+              "key": "field_shn_contact_infos",
+              "label": "Informations",
+              "name": "infos",
+              "type": "repeater",
+              "layout": "table",
+              "button_label": "Ajouter une information",
+              "sub_fields": [
+                {
+                  "key": "field_shn_contact_info_label",
+                  "label": "Libelle",
+                  "name": "label",
+                  "type": "text"
+                },
+                {
+                  "key": "field_shn_contact_info_value",
+                  "label": "Valeur",
+                  "name": "value",
+                  "type": "textarea",
+                  "new_lines": "br"
+                }
+              ]
+            },
+            {
+              "key": "field_shn_contact_wpforms_id",
+              "label": "ID WPForms",
+              "name": "wpforms_id",
+              "type": "number",
+              "min": 0,
+              "step": 1
+            }
+          ]
+        }
+      },
+      "button_label": "Ajouter une section",
+      "min": "",
+      "max": ""
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "page_type",
+        "operator": "==",
+        "value": "front_page"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "",
+  "show_in_rest": 0,
+  "modified": 1785720000
+}

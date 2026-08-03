@@ -1,22 +1,54 @@
-<header class="tf-site-header">
-    <div class="tf-site-header__inner tf-container">
-        <a class="tf-site-header__brand" href="{{ function('esc_url', site.url) }}">
-            {{ site.name }}
+<header class="tf-site-header" data-tf-site-header>
+    <div class="tf-site-header__inner">
+        <a class="tf-site-header__brand" href="#accueil" aria-label="Le Domaine du Pacifique, retour en haut de page">
+            {% if options.logo_header_light or options.logo_header_dark %}
+                {% if options.logo_header_light %}
+                    <img
+                        class="tf-site-header__logo tf-site-header__logo--light{% if not options.logo_header_dark %} tf-site-header__logo--fallback{% endif %}"
+                        src="{{ options.logo_header_light.url|e('html_attr') }}"
+                        alt="{{ options.logo_header_light.alt ?: 'Le Domaine du Pacifique' }}"
+                    >
+                {% endif %}
+
+                {% if options.logo_header_dark %}
+                    <img
+                        class="tf-site-header__logo tf-site-header__logo--dark{% if not options.logo_header_light %} tf-site-header__logo--fallback{% endif %}"
+                        src="{{ options.logo_header_dark.url|e('html_attr') }}"
+                        alt="{{ options.logo_header_dark.alt ?: 'Le Domaine du Pacifique' }}"
+                    >
+                {% endif %}
+            {% else %}
+                <span>Le Domaine</span>
+                <small>du Pacifique</small>
+            {% endif %}
         </a>
 
-        <button
-            class="tf-site-header__toggle"
-            type="button"
-            aria-label="{{ function('__', 'Ouvrir le menu', 'tealforge') }}"
-            aria-expanded="false"
-            data-tf-menu-toggle
-        >
-            <span class="tf-site-header__toggle-lines" aria-hidden="true"></span>
-        </button>
+        <nav class="tf-site-header__nav" aria-label="Navigation principale" data-tf-menu-panel>
+            <a href="#groupe">Le groupe</a>
+            <a href="#destinations">Destinations</a>
+            <a href="#hebergements">Hébergements</a>
+            <a href="#experiences">Expériences</a>
+            <a href="#contact">Contact</a>
+        </nav>
 
-        {% include 'components/menu.twig' with {
-            menu: menus.primary,
-            class_name: 'tf-menu'
-        } only %}
+        <div class="tf-site-header__right">
+            <div class="tf-site-header__lang" aria-label="Choix de la langue">
+                <a href="#" aria-current="true">FR</a>
+                <span>/</span>
+                <a href="#">EN</a>
+            </div>
+
+            <button
+                class="tf-site-header__toggle"
+                type="button"
+                aria-label="Ouvrir le menu"
+                aria-expanded="false"
+                data-tf-menu-toggle
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
     </div>
 </header>

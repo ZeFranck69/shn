@@ -21,7 +21,23 @@ function tealforge_get_context(): array
         'footer' => has_nav_menu('footer') ? Timber\Timber::get_menu('footer') : null,
     ];
 
+    $context['options'] = tealforge_get_site_options();
+
     return $context;
+}
+
+function tealforge_get_site_options(): array
+{
+    if (! function_exists('get_field')) {
+        return [];
+    }
+
+    return [
+        'logo_header_light' => tealforge_prepare_image_value(get_field('logo_header_light', 'option')),
+        'logo_header_dark' => tealforge_prepare_image_value(get_field('logo_header_dark', 'option')),
+        'logo_hero' => tealforge_prepare_image_value(get_field('logo_hero', 'option')),
+        'logo_footer' => tealforge_prepare_image_value(get_field('logo_footer', 'option')),
+    ];
 }
 
 function tealforge_render(string $template, array $context = []): void

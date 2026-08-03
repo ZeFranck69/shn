@@ -1,0 +1,44 @@
+<section class="tf-section tf-section--sable tf-experiences" id="{{ section.anchor_id|e('html_attr') }}">
+    <div class="tf-container">
+        <header class="tf-section__header">
+            <p class="tf-eyebrow">{{ section.eyebrow }}</p>
+            <h2 class="tf-h2">{{ section.title|raw }}</h2>
+            <div class="tf-rule" aria-hidden="true"></div>
+            <p>{{ section.intro|raw }}</p>
+        </header>
+
+        <div class="tf-experiences__grid">
+            {% for item in section.items %}
+                <article class="tf-experience-card reveal">
+                    {% include 'components/visual.twig' with {
+                        image: item.image,
+                        note: item.image_note,
+                        dark: false
+                    } only %}
+
+                    <div class="tf-experience-card__body">
+                        <p class="tf-place">{{ item.place }}</p>
+                        <h3>{{ item.title }}</h3>
+                        <p class="tf-endorse">{{ item.endorsement }}</p>
+                        <p>{{ item.description|raw }}</p>
+                        {% if item.link_url and item.link_label %}
+                            <a class="tf-link" href="{{ item.link_url|e('html_attr') }}" {% if item.target_blank %}target="_blank" rel="noopener"{% endif %}>
+                                {{ item.link_label }} <span aria-hidden="true">→</span>
+                            </a>
+                        {% endif %}
+                    </div>
+                </article>
+            {% endfor %}
+
+            {% if section.cta.title %}
+                <article class="tf-experience-card tf-experience-card--cta reveal">
+                    <div class="tf-experience-card__body">
+                        <h3>{{ section.cta.title }}</h3>
+                        <p>{{ section.cta.text|raw }}</p>
+                        <a class="tf-btn tf-btn--light" href="{{ section.cta.button_url|e('html_attr') }}">{{ section.cta.button_label }} <span aria-hidden="true">→</span></a>
+                    </div>
+                </article>
+            {% endif %}
+        </div>
+    </div>
+</section>

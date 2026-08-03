@@ -1,0 +1,10 @@
+<figure class="tf-visual{% if dark %} tf-visual--dark{% endif %}">
+    {% if image and image.url %}
+        <img src="{{ image.url|e('html_attr') }}" alt="{{ image.alt|e('html_attr') }}">
+    {% else %}
+        <span class="tf-symbol" aria-hidden="true"></span>
+        {% if note %}
+            <figcaption><b>{{ note|split(' - ')|first }}</b> {{ note|split(' - ')|slice(1)|join(' - ') }}</figcaption>
+        {% endif %}
+    {% endif %}
+</figure>
