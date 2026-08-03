@@ -559,11 +559,19 @@
             },
             {
               "key": "field_shn_contact_wpforms_id",
-              "label": "ID WPForms",
+              "label": "Formulaire WPForms",
               "name": "wpforms_id",
-              "type": "number",
-              "min": 0,
-              "step": 1
+              "type": "post_object",
+              "post_type": [
+                "wpforms"
+              ],
+              "post_status": [
+                "publish"
+              ],
+              "return_format": "id",
+              "ui": 1,
+              "allow_null": 1,
+              "multiple": 0
             }
           ]
         }

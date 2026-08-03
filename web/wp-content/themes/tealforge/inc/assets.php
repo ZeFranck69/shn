@@ -79,3 +79,48 @@ function tealforge_enqueue_assets(): void
 }
 
 add_action('wp_enqueue_scripts', 'tealforge_enqueue_assets');
+
+function tealforge_print_wpforms_contact_overrides(): void
+{
+    ?>
+    <style id="tealforge-wpforms-contact-overrides">
+        .tf-contact__form .wpforms-container,
+        .tf-contact__form .wpforms-form,
+        .tf-contact__form .wpforms-field-container,
+        .tf-contact__form .wpforms-field {
+            width: 100% !important;
+            max-width: none !important;
+        }
+
+        .tf-contact__form .wpforms-field {
+            padding: 0 0 1.5rem !important;
+        }
+
+        .tf-contact__form .wpforms-field input[type="text"],
+        .tf-contact__form .wpforms-field input[type="email"],
+        .tf-contact__form .wpforms-field select,
+        .tf-contact__form .wpforms-field textarea,
+        .tf-contact__form .wpforms-field-medium,
+        .tf-contact__form .wpforms-field-large {
+            width: 100% !important;
+            max-width: none !important;
+        }
+
+        .tf-contact__form .wpforms-field input[type="text"],
+        .tf-contact__form .wpforms-field input[type="email"],
+        .tf-contact__form .wpforms-field select {
+            min-height: 52px !important;
+        }
+
+        .tf-contact__form .wpforms-field textarea {
+            min-height: 130px !important;
+        }
+
+        .tf-contact__form .wpforms-submit-container {
+            padding: 0 !important;
+        }
+    </style>
+    <?php
+}
+
+add_action('wp_footer', 'tealforge_print_wpforms_contact_overrides', 999);

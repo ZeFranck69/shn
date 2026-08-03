@@ -872,14 +872,15 @@ p:last-child {
 }
 
 .tf-form,
-.wpforms-container form {
+.tf-contact__form .wpforms-form {
   display: grid;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 .tf-form label,
-.wpforms-container .wpforms-field-label {
+.tf-contact__form .wpforms-field-label {
   display: block;
+  margin: 0 0 0.55rem;
   color: var(--tf-ocean-60);
   font-size: 0.68rem;
   font-weight: 600;
@@ -890,22 +891,48 @@ p:last-child {
 .tf-form input,
 .tf-form textarea,
 .tf-form select,
-.wpforms-container input[type="text"],
-.wpforms-container input[type="email"],
-.wpforms-container textarea,
-.wpforms-container select {
-  width: 100%;
-  margin-top: 0.45rem;
+.tf-contact__form .wpforms-field input[type="text"],
+.tf-contact__form .wpforms-field input[type="email"],
+.tf-contact__form .wpforms-field textarea,
+.tf-contact__form .wpforms-field select {
+  width: 100% !important;
+  max-width: 100% !important;
   border: 1px solid var(--tf-ocean-12);
   border-radius: 0;
   padding: 0.85rem 0.95rem;
   background: var(--tf-white);
   color: var(--tf-ocean);
   font: inherit;
+  transition: border-color 0.2s ease;
+}
+
+.tf-contact__form .wpforms-container {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+}
+
+.tf-contact__form .wpforms-field {
+  width: 100% !important;
+  max-width: none !important;
+  padding: 0 !important;
+}
+
+.tf-contact__form .wpforms-field-medium,
+.tf-contact__form .wpforms-field-large {
+  width: 100% !important;
+  max-width: none !important;
+}
+
+.tf-contact__form .wpforms-field input:focus,
+.tf-contact__form .wpforms-field textarea:focus,
+.tf-contact__form .wpforms-field select:focus {
+  border-color: var(--tf-ocean);
+  outline: none;
 }
 
 .tf-form textarea,
-.wpforms-container textarea {
+.tf-contact__form .wpforms-field textarea {
   min-height: 130px;
   resize: vertical;
 }
@@ -927,8 +954,65 @@ p:last-child {
   accent-color: var(--tf-vermeil);
 }
 
-.wpforms-container button[type="submit"] {
+.tf-contact__form .wpforms-field-gdpr-checkbox ul {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tf-contact__form .wpforms-field-gdpr-checkbox li {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+.tf-contact__form .wpforms-field-gdpr-checkbox input[type="checkbox"] {
+  width: auto;
+  min-width: 1rem;
+  margin: 0.25rem 0 0;
+  accent-color: var(--tf-vermeil);
+}
+
+.tf-contact__form .wpforms-field-gdpr-checkbox .wpforms-field-label {
+  display: none;
+}
+
+.tf-contact__form .wpforms-field-gdpr-checkbox .wpforms-field-label-inline {
+  margin: 0;
+  color: var(--tf-ocean);
+  font-size: 0.84rem;
+  font-weight: 300;
+  letter-spacing: 0;
+  line-height: 1.5;
+  text-transform: none;
+}
+
+.tf-contact__form .wpforms-submit-container {
+  padding: 0 !important;
+}
+
+.tf-contact__form .wpforms-error,
+.tf-contact__form em.wpforms-error {
+  margin-top: 0.4rem;
+  color: var(--tf-vermeil);
+  font-size: 0.82rem;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.tf-contact__form .wpforms-confirmation-container-full {
+  border: 1px solid rgba(132, 209, 191, 0.38);
+  background: rgba(132, 209, 191, 0.16);
+  color: var(--tf-ocean);
+  padding: 1rem 1.15rem;
+  font-weight: 300;
+}
+
+.tf-contact__form button[type="submit"] {
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
   width: auto;
   border: 1px solid var(--tf-vermeil);
   padding: 0.95rem 1.9rem;
@@ -939,6 +1023,13 @@ p:last-child {
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+.tf-contact__form button[type="submit"]:hover {
+  border-color: #c9482a;
+  background: #c9482a;
 }
 
 .tf-site-footer {

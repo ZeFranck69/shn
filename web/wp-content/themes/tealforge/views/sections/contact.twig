@@ -17,9 +17,9 @@
                 {% endif %}
             </div>
 
-            <div>
+            <div class="tf-contact__form">
                 {% if section.wpforms_id %}
-                    {{ function('do_shortcode', '[wpforms id="' ~ section.wpforms_id ~ '"]') }}
+                    {{ function('do_shortcode', '[wpforms id="' ~ section.wpforms_id ~ '" title="false" description="false"]')|raw }}
                 {% else %}
                     <div class="tf-form" aria-label="Formulaire de contact">
                         <label>Nom et prenom<input type="text" autocomplete="name"></label>
@@ -27,7 +27,7 @@
                         <label>Votre demande concerne<select><option>Un séjour dans l'un de nos établissements</option><option>Un evenement ou un séminaire</option><option>Une activite ou une expérience</option><option>Un partenariat</option><option>Autre demande</option></select></label>
                         <label>Message<textarea></textarea></label>
                         <label class="tf-form__consent"><input type="checkbox"> <span>J'accepte que mes données soient utilisées pour traiter ma demande, conformêment a la politique de confidentialité.</span></label>
-                        <a class="tf-btn" href="#contact">Envoyer ma demande <span aria-hidden="true">→</span></a>
+                        <button class="tf-btn" type="button">Envoyer ma demande <span aria-hidden="true">→</span></button>
                     </div>
                 {% endif %}
             </div>
