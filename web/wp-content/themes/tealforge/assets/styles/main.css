@@ -429,7 +429,7 @@ p:last-child {
 .tf-hero {
   position: relative;
   display: grid;
-  min-height: 100svh;
+  min-height: max(100svh, 760px);
   place-items: center;
   overflow: hidden;
   background: var(--tf-ocean);
@@ -458,7 +458,7 @@ p:last-child {
   position: relative;
   z-index: 2;
   max-width: 940px;
-  padding: 8rem var(--tf-gutter) 6rem;
+  padding: 8rem var(--tf-gutter) 9.5rem;
   text-align: center;
 }
 
@@ -1289,6 +1289,10 @@ p:last-child {
     scroll-padding-top: 74px;
   }
 
+  .tf-hero {
+    min-height: max(100svh, 820px);
+  }
+
   .tf-site-header__inner {
     gap: 1rem;
     padding-block: 0.8rem;
@@ -1300,6 +1304,7 @@ p:last-child {
 
   .tf-hero__content {
     padding-top: 7rem;
+    padding-bottom: 10.5rem;
   }
 
   .tf-hero h1 {
