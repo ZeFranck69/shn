@@ -5,11 +5,17 @@ const initHeader = () => {
     return;
   }
 
+  const syncHeight = () => {
+    document.documentElement.style.setProperty('--tf-site-header-height', `${header.offsetHeight}px`);
+  };
+
   const sync = () => {
     header.classList.toggle('is-scrolled', window.scrollY > 24);
   };
 
+  syncHeight();
   sync();
+  window.addEventListener('resize', syncHeight);
   window.addEventListener('scroll', sync, { passive: true });
 };
 
@@ -22,7 +28,30 @@ const initMobileNavigation = () => {
   }
 
   const setOpen = (isOpen) => {
-    document.body.classList.toggle('tf-menu-is-open', isOpen);
+    const isCurrentlyOpen = document.body.classList.contains('tf-menu-is-open');
+
+    if (isOpen && !isCurrentlyOpen) {
+      const scrollY = window.scrollY;
+      document.body.dataset.tfScrollLock = String(scrollY);
+      document.body.style.top = `-${scrollY}px`;
+      document.body.classList.add('tf-menu-is-open');
+    }
+
+    if (!isOpen && isCurrentlyOpen) {
+      const scrollY = Number.parseInt(document.body.dataset.tfScrollLock || '0', 10);
+      const previousScrollBehavior = document.documentElement.style.scrollBehavior;
+
+      delete document.body.dataset.tfScrollLock;
+      document.documentElement.style.scrollBehavior = 'auto';
+      document.body.classList.remove('tf-menu-is-open');
+      document.body.style.top = '';
+      window.scrollTo(0, scrollY);
+
+      requestAnimationFrame(() => {
+        document.documentElement.style.scrollBehavior = previousScrollBehavior;
+      });
+    }
+
     toggle.setAttribute('aria-expanded', String(isOpen));
     toggle.setAttribute('aria-label', isOpen ? 'Fermer le menu' : 'Ouvrir le menu');
   };

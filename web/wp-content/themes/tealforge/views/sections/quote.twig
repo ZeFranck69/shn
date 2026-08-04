@@ -1,6 +1,15 @@
 <section class="tf-section tf-section--ocean tf-quote">
-    <div class="tf-container">
-        <span class="tf-symbol" aria-hidden="true"></span>
+    <div class="tf-container reveal">
+        {% if section.image %}
+            <img
+                class="tf-quote__image"
+                src="{{ section.image.url|e('html_attr') }}"
+                alt="{{ section.image.alt ?: '' }}"
+                {% if not section.image.alt %}aria-hidden="true"{% endif %}
+            >
+        {% else %}
+            <span class="tf-symbol" aria-hidden="true"></span>
+        {% endif %}
         <blockquote>{{ section.quote }}</blockquote>
         <p>{{ section.attribution }}</p>
     </div>

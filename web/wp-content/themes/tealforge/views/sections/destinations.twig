@@ -1,12 +1,14 @@
 <section class="tf-section tf-section--ocean tf-destinations" id="{{ section.anchor_id|e('html_attr') }}">
     <div class="tf-container">
-        <p class="tf-eyebrow">{{ section.eyebrow }}</p>
-        <h2 class="tf-h2">{{ section.title|raw }}</h2>
-        <p class="tf-section__intro">{{ section.intro|raw }}</p>
+        <div class="reveal">
+            <p class="tf-eyebrow">{{ section.eyebrow }}</p>
+            <h2 class="tf-h2">{{ section.title|raw }}</h2>
+            <p class="tf-section__intro">{{ section.intro|raw }}</p>
+        </div>
 
         <div class="tf-destinations__grid">
             {% for destination in section.items %}
-                <article class="tf-destinations__item">
+                <article class="tf-destinations__item reveal">
                     <span>{{ destination.index }}</span>
                     <h3>{{ destination.title }}</h3>
                     <p>{{ destination.place }}</p>

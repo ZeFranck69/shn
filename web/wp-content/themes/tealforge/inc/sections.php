@@ -38,6 +38,7 @@ function tealforge_prepare_shn_section(array $row): ?array
             'layout' => 'hero',
             'anchor_id' => tealforge_prepare_anchor($row['anchor_id'] ?? 'accueil'),
             'background_image' => tealforge_prepare_image_value($row['background_image'] ?? null),
+            'hero_image' => tealforge_prepare_image_value($row['hero_image'] ?? null),
             'title' => wp_kses_post((string) ($row['title'] ?? '')),
             'subtitle' => wp_kses_post((string) ($row['subtitle'] ?? '')),
             'buttons' => tealforge_prepare_buttons($row['buttons'] ?? []),
@@ -70,6 +71,7 @@ function tealforge_prepare_shn_section(array $row): ?array
         ],
         'quote' => [
             'layout' => 'quote',
+            'image' => tealforge_prepare_image_value($row['image'] ?? null),
             'quote' => sanitize_text_field((string) ($row['quote'] ?? '')),
             'attribution' => sanitize_text_field((string) ($row['attribution'] ?? '')),
         ],
@@ -282,6 +284,7 @@ function tealforge_get_default_page_sections(): array
             'layout' => 'hero',
             'anchor_id' => 'accueil',
             'background_image' => null,
+            'hero_image' => null,
             'title' => 'Vivre la Nouvelle-Calédonie<br><em>dans toute son intensité</em>',
             'subtitle' => 'Hôtels, restaurants, spas, golfs, casinos et expériences exclusives. Le seul groupe calédonien a reunir hébergement et loisirs premium.',
             'buttons' => [
@@ -317,6 +320,7 @@ function tealforge_get_default_page_sections(): array
         ],
         [
             'layout' => 'quote',
+            'image' => null,
             'quote' => "Le même niveau d'attention sur chacun de nos sites.",
             'attribution' => 'Notre promesse',
         ],

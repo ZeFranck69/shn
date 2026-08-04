@@ -8,11 +8,12 @@
     </div>
 
     <div class="tf-hero__content">
-        {% if options.logo_hero %}
+        {% set hero_image = section.hero_image ?: options.logo_hero %}
+        {% if hero_image %}
             <img
                 class="tf-hero__logo"
-                src="{{ options.logo_hero.url|e('html_attr') }}"
-                alt="{{ options.logo_hero.alt ?: 'Le Domaine du Pacifique' }}"
+                src="{{ hero_image.url|e('html_attr') }}"
+                alt="{{ hero_image.alt ?: 'Le Domaine du Pacifique' }}"
             >
         {% else %}
             <span class="tf-brand-mark tf-brand-mark--large" aria-hidden="true"></span>

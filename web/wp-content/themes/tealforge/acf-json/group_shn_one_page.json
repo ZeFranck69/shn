@@ -32,9 +32,20 @@
             },
             {
               "key": "field_shn_hero_background_image",
-              "label": "Image de fond",
+              "label": "Image background hero",
               "name": "background_image",
               "type": "image",
+              "return_format": "array",
+              "preview_size": "medium",
+              "library": "all",
+              "instructions": "Image de fond plein écran du hero."
+            },
+            {
+              "key": "field_shn_hero_image",
+              "label": "Image hero",
+              "name": "hero_image",
+              "type": "image",
+              "instructions": "Logo ou image centrée dans le hero. Affichée à 280 px de large.",
               "return_format": "array",
               "preview_size": "medium",
               "library": "all"
@@ -355,6 +366,16 @@
           "label": "Citation",
           "display": "block",
           "sub_fields": [
+            {
+              "key": "field_shn_quote_image",
+              "label": "Image",
+              "name": "image",
+              "type": "image",
+              "instructions": "Image ou marque affichée au-dessus de la citation.",
+              "return_format": "array",
+              "preview_size": "medium",
+              "library": "all"
+            },
             {
               "key": "field_shn_quote_text",
               "label": "Citation",
