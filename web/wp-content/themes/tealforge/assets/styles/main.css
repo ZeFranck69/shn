@@ -54,7 +54,7 @@ body {
   background: var(--tf-white);
   color: var(--tf-ocean);
   font-family: var(--tf-sans);
-  font-size: clamp(0.98rem, 0.35vw + 0.9rem, 1.06rem);
+  font-size: clamp(0.98rem, 0.35vw + 0.9rem, 1.05rem);
   font-weight: 400;
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
@@ -85,7 +85,8 @@ h4 {
   margin: 0;
   font-family: var(--tf-serif);
   font-weight: 700;
-  line-height: 1.12;
+  font-style: normal;
+  line-height: 1.28;
 }
 
 p {
@@ -133,7 +134,9 @@ p:last-child {
 
 .tf-section__header p,
 .tf-section__intro {
-  font-weight: 300;
+  font-size: clamp(1.04rem, 0.5vw + 0.94rem, 1.22rem);
+  font-weight: 600;
+  line-height: 1.4;
 }
 
 .tf-section__intro {
@@ -157,17 +160,18 @@ p:last-child {
 }
 
 .tf-h2 {
-  font-size: clamp(2rem, 3.9vw, 3.15rem);
-  letter-spacing: 0.008em;
+  font-size: clamp(1.4rem, 2.5vw, 2.05rem);
+  letter-spacing: 0.045em;
 }
 
 .tf-h3 {
-  font-size: clamp(1.5rem, 2.1vw, 1.95rem);
-  line-height: 1.15;
+  font-size: clamp(1.1rem, 1.35vw, 1.3rem);
+  letter-spacing: 0.04em;
+  line-height: 1.28;
 }
 
 .tf-lead {
-  font-size: clamp(1.05rem, 0.5vw + 0.95rem, 1.25rem);
+  font-size: clamp(1.04rem, 0.5vw + 0.94rem, 1.22rem);
   font-weight: 600;
   line-height: 1.4;
 }
@@ -480,10 +484,10 @@ p:last-child {
 
 .tf-hero h1 {
   color: var(--tf-white);
-  font-size: clamp(2.35rem, 5.6vw, 4.3rem);
-  font-weight: 500;
-  letter-spacing: 0.015em;
-  line-height: 1.06;
+  font-size: clamp(1.85rem, 3.9vw, 3.05rem);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  line-height: 1.28;
 }
 
 .tf-hero h1 em {
@@ -495,9 +499,9 @@ p:last-child {
   max-width: 44ch;
   margin: 1.9rem auto 0;
   color: rgba(244, 236, 233, 0.9);
-  font-size: clamp(1rem, 0.5vw + 0.9rem, 1.18rem);
-  font-weight: 300;
-  line-height: 1.55;
+  font-size: clamp(0.98rem, 0.35vw + 0.9rem, 1.05rem);
+  font-weight: 400;
+  line-height: 1.7;
 }
 
 .tf-hero__actions {
@@ -841,7 +845,9 @@ p:last-child {
 
 .tf-asset__body > p:not(.tf-place):not(.tf-endorse) {
   margin-bottom: 1.7rem;
-  font-weight: 300;
+  font-size: 0.98rem;
+  font-weight: 400;
+  line-height: 1.7;
 }
 
 .tf-quote {
@@ -922,15 +928,16 @@ p:last-child {
 
 .tf-experience-card h3 {
   margin-bottom: 0.8rem;
-  font-size: 1.55rem;
-  line-height: 1.15;
+  font-size: clamp(1.1rem, 1.35vw, 1.3rem);
+  letter-spacing: 0.04em;
+  line-height: 1.28;
 }
 
 .tf-experience-card p:not(.tf-place):not(.tf-endorse) {
   margin-bottom: 1.4rem;
   font-size: 0.94rem;
-  font-weight: 300;
-  line-height: 1.65;
+  font-weight: 400;
+  line-height: 1.7;
 }
 
 .tf-experience-card__body p {
@@ -1388,10 +1395,6 @@ p:last-child {
   .tf-hero__content {
     padding-top: 7rem;
     padding-bottom: 10.5rem;
-  }
-
-  .tf-hero h1 {
-    font-size: clamp(2.25rem, 13vw, 3.2rem);
   }
 
   .tf-btn {
