@@ -1,4 +1,20 @@
-@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Nunito+Sans:wght@300;400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700&display=swap");
+
+@font-face {
+  font-family: "Trajan Pro";
+  src: url("../fonts/TrajanPro-Regular.ttf") format("truetype");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Trajan Pro";
+  src: url("../fonts/TrajanPro-Bold.otf") format("opentype");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 700;
+}
 
 :root {
   --tf-ocean: #033744;
@@ -11,7 +27,7 @@
   --tf-santal: #f2e5dd;
   --tf-sable: #f4ece9;
   --tf-white: #ffffff;
-  --tf-serif: "EB Garamond", Georgia, "Times New Roman", serif;
+  --tf-serif: "Trajan Pro", Georgia, "Times New Roman", serif;
   --tf-sans: "Nunito Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --tf-container: 1240px;
   --tf-gutter: clamp(1.25rem, 4vw, 3rem);
@@ -594,6 +610,42 @@ p:last-child {
     linear-gradient(155deg, #06485a 0%, var(--tf-ocean) 55%, #022935 100%);
 }
 
+.tf-assets .tf-asset:nth-of-type(3n + 1) .tf-visual,
+.tf-experience-card:nth-child(5n + 1) .tf-visual {
+  border-color: transparent;
+  background: linear-gradient(155deg, #0a5566 0%, var(--tf-ocean) 60%, #022630 100%);
+}
+
+.tf-assets .tf-asset:nth-of-type(3n + 1) .tf-visual > .tf-symbol,
+.tf-experience-card:nth-child(5n + 1) .tf-visual > .tf-symbol {
+  color: var(--tf-lagon);
+  opacity: 0.22;
+}
+
+.tf-assets .tf-asset:nth-of-type(3n + 2) .tf-visual,
+.tf-experience-card:nth-child(5n + 2) .tf-visual,
+.tf-experience-card:nth-child(5n + 3) .tf-visual {
+  border-color: transparent;
+  background: linear-gradient(155deg, #b6e6da 0%, var(--tf-lagon) 60%, #63bda6 100%);
+}
+
+.tf-assets .tf-asset:nth-of-type(3n + 2) .tf-visual > .tf-symbol,
+.tf-experience-card:nth-child(5n + 2) .tf-visual > .tf-symbol,
+.tf-experience-card:nth-child(5n + 3) .tf-visual > .tf-symbol {
+  color: var(--tf-ocean);
+  opacity: 0.22;
+}
+
+.tf-experience-card:nth-child(5n + 4) .tf-visual {
+  border-color: transparent;
+  background: linear-gradient(155deg, #f0a58f 0%, #e8785a 55%, var(--tf-vermeil) 100%);
+}
+
+.tf-experience-card:nth-child(5n + 4) .tf-visual > .tf-symbol {
+  color: var(--tf-white);
+  opacity: 0.28;
+}
+
 .tf-visual img {
   width: 100%;
   height: 100%;
@@ -829,7 +881,7 @@ p:last-child {
 
 .tf-experiences__grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(1.5rem, 2.6vw, 2.4rem);
 }
 
@@ -888,6 +940,24 @@ p:last-child {
 .tf-experience-card .tf-link {
   margin-top: auto;
   align-self: flex-start;
+}
+
+.tf-experience-card--wide {
+  flex-direction: row;
+  grid-column: span 2;
+}
+
+.tf-experience-card--wide .tf-visual {
+  flex: 0 0 48%;
+  align-self: stretch;
+  aspect-ratio: auto;
+  border-right: 1px solid var(--tf-ocean-12);
+  border-bottom: 0;
+}
+
+.tf-experience-card--wide .tf-experience-card__body {
+  justify-content: center;
+  padding: clamp(1.7rem, 2.8vw, 2.8rem);
 }
 
 .tf-experience-card--cta {
@@ -1271,6 +1341,19 @@ p:last-child {
   .tf-experiences__grid,
   .tf-site-footer__top {
     grid-template-columns: 1fr;
+  }
+
+  .tf-experience-card--wide {
+    flex-direction: column;
+    grid-column: auto;
+  }
+
+  .tf-experience-card--wide .tf-visual {
+    flex: none;
+    align-self: auto;
+    aspect-ratio: 4 / 3;
+    border-right: 0;
+    border-bottom: 1px solid var(--tf-ocean-12);
   }
 
   .tf-destinations__item {

@@ -1,11 +1,23 @@
 {
+  "assets/fonts/TrajanPro-Bold.otf": {
+    "file": "assets/TrajanPro-Bold.BqrE6oXJ.otf",
+    "src": "assets/fonts/TrajanPro-Bold.otf"
+  },
+  "assets/fonts/TrajanPro-Regular.ttf": {
+    "file": "assets/TrajanPro-Regular.B-Q-yDEN.ttf",
+    "src": "assets/fonts/TrajanPro-Regular.ttf"
+  },
   "assets/scripts/main.js": {
-    "file": "assets/scripts/main.Dkj-mCY2.js",
+    "file": "assets/scripts/main.CnL-1Bre.js",
     "name": "main",
     "src": "assets/scripts/main.js",
     "isEntry": true,
     "css": [
-      "assets/styles/main.Bnl1UvEP.css"
+      "assets/styles/main.CJyjKWP2.css"
+    ],
+    "assets": [
+      "assets/TrajanPro-Regular.B-Q-yDEN.ttf",
+      "assets/TrajanPro-Bold.BqrE6oXJ.otf"
     ]
   }
 }

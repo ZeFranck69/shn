@@ -289,10 +289,47 @@
               "new_lines": "br"
             },
             {
+              "key": "field_shn_accommodations_selection_mode",
+              "label": "Mode de sélection",
+              "name": "selection_mode",
+              "type": "select",
+              "instructions": "Manuel : choisir les hébergements ci-dessous. Tous : affiche tous les hébergements publiés.",
+              "choices": {
+                "manual": "Manuel",
+                "all": "Tous"
+              },
+              "default_value": "manual",
+              "return_format": "value",
+              "ui": 1
+            },
+            {
+              "key": "field_shn_accommodations_selected_items",
+              "label": "Hébergements à afficher",
+              "name": "selected_items",
+              "type": "relationship",
+              "instructions": "Sélectionner les hébergements à afficher dans l’ordre souhaité.",
+              "post_type": [
+                "hebergement"
+              ],
+              "post_status": [
+                "publish"
+              ],
+              "filters": [
+                "search"
+              ],
+              "return_format": "id",
+              "min": "",
+              "max": "",
+              "elements": [
+                "featured_image"
+              ]
+            },
+            {
               "key": "field_shn_accommodations_items",
               "label": "Hébergements",
               "name": "items",
               "type": "repeater",
+              "instructions": "Ancien contenu conservé comme fallback. Privilégier les contenus du CPT Hébergements ci-dessus.",
               "layout": "block",
               "button_label": "Ajouter un hébergement",
               "sub_fields": [
@@ -425,10 +462,47 @@
               "new_lines": "br"
             },
             {
+              "key": "field_shn_experiences_selection_mode",
+              "label": "Mode de sélection",
+              "name": "selection_mode",
+              "type": "select",
+              "instructions": "Manuel : choisir les expériences ci-dessous. Tous : affiche toutes les expériences publiées.",
+              "choices": {
+                "manual": "Manuel",
+                "all": "Tous"
+              },
+              "default_value": "manual",
+              "return_format": "value",
+              "ui": 1
+            },
+            {
+              "key": "field_shn_experiences_selected_items",
+              "label": "Expériences à afficher",
+              "name": "selected_items",
+              "type": "relationship",
+              "instructions": "Sélectionner les expériences à afficher dans l’ordre souhaité.",
+              "post_type": [
+                "experience"
+              ],
+              "post_status": [
+                "publish"
+              ],
+              "filters": [
+                "search"
+              ],
+              "return_format": "id",
+              "min": "",
+              "max": "",
+              "elements": [
+                "featured_image"
+              ]
+            },
+            {
               "key": "field_shn_expériences_items",
               "label": "Expériences",
               "name": "items",
               "type": "repeater",
+              "instructions": "Ancien contenu conservé comme fallback. Privilégier les contenus du CPT Expériences ci-dessus.",
               "layout": "block",
               "button_label": "Ajouter une expérience",
               "sub_fields": [
@@ -620,5 +694,5 @@
   "active": true,
   "description": "",
   "show_in_rest": 0,
-  "modified": 1785720000
+  "modified": 1786343952
 }

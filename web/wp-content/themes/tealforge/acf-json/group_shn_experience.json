@@ -1,0 +1,100 @@
+{
+  "key": "group_shn_experience",
+  "title": "SHN - Expérience",
+  "fields": [
+    {
+      "key": "field_shn_experience_image",
+      "label": "Image principale",
+      "name": "image",
+      "type": "image",
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_shn_experience_image_note",
+      "label": "Note visuel",
+      "name": "image_note",
+      "type": "text"
+    },
+    {
+      "key": "field_shn_experience_place",
+      "label": "Lieu",
+      "name": "place",
+      "type": "text"
+    },
+    {
+      "key": "field_shn_experience_endorsement",
+      "label": "Signature",
+      "name": "endorsement",
+      "type": "text"
+    },
+    {
+      "key": "field_shn_experience_description",
+      "label": "Description courte",
+      "name": "description",
+      "type": "textarea",
+      "new_lines": "br"
+    },
+    {
+      "key": "field_shn_experience_link_label",
+      "label": "Libellé lien",
+      "name": "link_label",
+      "type": "text",
+      "default_value": "Découvrir"
+    },
+    {
+      "key": "field_shn_experience_link_url",
+      "label": "URL lien",
+      "name": "link_url",
+      "type": "url"
+    },
+    {
+      "key": "field_shn_experience_target_blank",
+      "label": "Nouvel onglet",
+      "name": "target_blank",
+      "type": "true_false",
+      "ui": 1,
+      "default_value": 1
+    },
+    {
+      "key": "field_shn_experience_layout_variant",
+      "label": "Variante d’affichage",
+      "name": "layout_variant",
+      "type": "select",
+      "choices": {
+        "normal": "Normal",
+        "wide": "Large"
+      },
+      "default_value": "normal",
+      "return_format": "value",
+      "ui": 1
+    },
+    {
+      "key": "field_shn_experience_display_order",
+      "label": "Ordre d’affichage",
+      "name": "display_order",
+      "type": "number",
+      "default_value": 0
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "experience"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "",
+  "show_in_rest": 0,
+  "modified": 1786320000
+}

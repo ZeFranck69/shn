@@ -17,6 +17,10 @@ function tealforge_prepare_page_sections(int $post_id): array
                     continue;
                 }
 
+                if ('quote' === sanitize_key((string) $row['acf_fc_layout'])) {
+                    continue;
+                }
+
                 $section = tealforge_prepare_shn_section($row);
 
                 if ($section) {
@@ -67,7 +71,13 @@ function tealforge_prepare_shn_section(array $row): ?array
             'eyebrow' => sanitize_text_field((string) ($row['eyebrow'] ?? '')),
             'title' => wp_kses_post((string) ($row['title'] ?? '')),
             'intro' => wp_kses_post((string) ($row['intro'] ?? '')),
-            'items' => tealforge_prepare_cards($row['items'] ?? [], 'accommodation'),
+            'items' => tealforge_prepare_section_cards(
+                $row['items'] ?? [],
+                'accommodation',
+                'hebergement',
+                $row['selection_mode'] ?? 'manual',
+                $row['selected_items'] ?? []
+            ),
         ],
         'quote' => [
             'layout' => 'quote',
@@ -81,12 +91,18 @@ function tealforge_prepare_shn_section(array $row): ?array
             'eyebrow' => sanitize_text_field((string) ($row['eyebrow'] ?? '')),
             'title' => wp_kses_post((string) ($row['title'] ?? '')),
             'intro' => wp_kses_post((string) ($row['intro'] ?? '')),
-            'items' => tealforge_prepare_cards($row['items'] ?? [], 'experience'),
+            'items' => tealforge_prepare_section_cards(
+                $row['items'] ?? [],
+                'experience',
+                'experience',
+                $row['selection_mode'] ?? 'manual',
+                $row['selected_items'] ?? []
+            ),
             'cta' => [
-                'title' => sanitize_text_field((string) ($row['cta_title'] ?? '')),
-                'text' => wp_kses_post((string) ($row['cta_text'] ?? '')),
-                'button_label' => sanitize_text_field((string) ($row['cta_button_label'] ?? '')),
-                'button_url' => esc_url((string) ($row['cta_button_url'] ?? '#contact')),
+                'title' => '',
+                'text' => '',
+                'button_label' => '',
+                'button_url' => '',
             ],
         ],
         'contact' => [
@@ -221,6 +237,98 @@ function tealforge_prepare_cards(mixed $rows, string $kind): array
     }
 
     return $cards;
+}
+
+function tealforge_prepare_section_cards(mixed $fallback_rows, string $kind, string $post_type, mixed $selection_mode, mixed $selected_items): array
+{
+    $post_ids = tealforge_get_section_card_post_ids($post_type, $selection_mode, $selected_items);
+
+    if ($post_ids) {
+        return tealforge_prepare_post_cards($post_ids, $kind);
+    }
+
+    return tealforge_prepare_cards($fallback_rows, $kind);
+}
+
+function tealforge_get_section_card_post_ids(string $post_type, mixed $selection_mode, mixed $selected_items): array
+{
+    $mode = sanitize_key((string) $selection_mode);
+
+    if ('all' === $mode) {
+        return get_posts([
+            'post_type' => $post_type,
+            'post_status' => 'publish',
+            'posts_per_page' => -1,
+            'orderby' => [
+                'menu_order' => 'ASC',
+                'title' => 'ASC',
+            ],
+            'fields' => 'ids',
+            'no_found_rows' => true,
+        ]);
+    }
+
+    if (! is_array($selected_items)) {
+        return [];
+    }
+
+    $post_ids = [];
+
+    foreach ($selected_items as $item) {
+        $post_id = is_object($item) && isset($item->ID) ? (int) $item->ID : absint($item);
+
+        if ($post_id > 0 && $post_type === get_post_type($post_id) && 'publish' === get_post_status($post_id)) {
+            $post_ids[] = $post_id;
+        }
+    }
+
+    return array_values(array_unique($post_ids));
+}
+
+function tealforge_prepare_post_cards(array $post_ids, string $kind): array
+{
+    $cards = [];
+
+    foreach ($post_ids as $index => $post_id) {
+        $image = function_exists('get_field') ? get_field('image', $post_id) : null;
+
+        if (! $image && has_post_thumbnail($post_id)) {
+            $image = get_post_thumbnail_id($post_id);
+        }
+
+        $layout_variant = function_exists('get_field') ? get_field('layout_variant', $post_id) : '';
+
+        $cards[] = [
+            'kind' => $kind,
+            'image' => tealforge_prepare_image_value($image),
+            'image_note' => tealforge_get_post_field_text($post_id, 'image_note'),
+            'place' => tealforge_get_post_field_text($post_id, 'place'),
+            'title' => get_the_title($post_id),
+            'endorsement' => tealforge_get_post_field_text($post_id, 'endorsement'),
+            'description' => tealforge_get_post_field_html($post_id, 'description'),
+            'link_label' => tealforge_get_post_field_text($post_id, 'link_label') ?: 'Découvrir',
+            'link_url' => esc_url((string) (function_exists('get_field') ? get_field('link_url', $post_id) : '')),
+            'target_blank' => (bool) (function_exists('get_field') ? get_field('target_blank', $post_id) : true),
+            'reverse' => 'accommodation' === $kind && 1 === ((int) $index % 2),
+            'layout_variant' => 'wide' === $layout_variant ? 'wide' : 'normal',
+        ];
+    }
+
+    return $cards;
+}
+
+function tealforge_get_post_field_text(int $post_id, string $field_name): string
+{
+    $value = function_exists('get_field') ? get_field($field_name, $post_id) : '';
+
+    return sanitize_text_field((string) $value);
+}
+
+function tealforge_get_post_field_html(int $post_id, string $field_name): string
+{
+    $value = function_exists('get_field') ? get_field($field_name, $post_id) : '';
+
+    return wp_kses_post((string) $value);
 }
 
 function tealforge_prepare_contact_infos(mixed $rows): array

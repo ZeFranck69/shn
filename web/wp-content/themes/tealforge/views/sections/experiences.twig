@@ -1,4 +1,4 @@
-<section class="tf-section tf-section--sable tf-experiences" id="{{ section.anchor_id|e('html_attr') }}">
+<section class="tf-section tf-experiences" id="{{ section.anchor_id|e('html_attr') }}">
     <div class="tf-container">
         <header class="tf-section__header reveal">
             <p class="tf-eyebrow">{{ section.eyebrow }}</p>
@@ -9,7 +9,7 @@
 
         <div class="tf-experiences__grid">
             {% for item in section.items %}
-                <article class="tf-experience-card reveal">
+                <article class="tf-experience-card reveal{% if item.layout_variant == 'wide' %} tf-experience-card--wide{% endif %}">
                     {% include 'components/visual.twig' with {
                         image: item.image,
                         note: item.image_note,
@@ -30,15 +30,6 @@
                 </article>
             {% endfor %}
 
-            {% if section.cta.title %}
-                <article class="tf-experience-card tf-experience-card--cta reveal">
-                    <div class="tf-experience-card__body">
-                        <h3>{{ section.cta.title }}</h3>
-                        <p>{{ section.cta.text|raw }}</p>
-                        <a class="tf-btn tf-btn--light" href="{{ section.cta.button_url|e('html_attr') }}">{{ section.cta.button_label }} <span aria-hidden="true">→</span></a>
-                    </div>
-                </article>
-            {% endif %}
         </div>
     </div>
 </section>

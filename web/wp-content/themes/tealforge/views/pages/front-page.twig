@@ -2,7 +2,9 @@
 
 {% block content %}
     {% for section in sections %}
-        {% include 'sections/' ~ section.layout ~ '.twig' with { section: section, options: options } only %}
+        {% if section.layout != 'quote' %}
+            {% include 'sections/' ~ section.layout ~ '.twig' with { section: section, options: options } only %}
+        {% endif %}
     {% else %}
         <section class="tf-content">
             <div class="tf-content__inner">

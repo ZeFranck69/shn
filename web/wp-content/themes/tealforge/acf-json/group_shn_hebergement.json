@@ -1,0 +1,87 @@
+{
+  "key": "group_shn_hebergement",
+  "title": "SHN - Hébergement",
+  "fields": [
+    {
+      "key": "field_shn_hebergement_image",
+      "label": "Image principale",
+      "name": "image",
+      "type": "image",
+      "return_format": "array",
+      "preview_size": "medium",
+      "library": "all"
+    },
+    {
+      "key": "field_shn_hebergement_image_note",
+      "label": "Note visuel",
+      "name": "image_note",
+      "type": "text"
+    },
+    {
+      "key": "field_shn_hebergement_place",
+      "label": "Lieu",
+      "name": "place",
+      "type": "text"
+    },
+    {
+      "key": "field_shn_hebergement_endorsement",
+      "label": "Signature",
+      "name": "endorsement",
+      "type": "text"
+    },
+    {
+      "key": "field_shn_hebergement_description",
+      "label": "Description courte",
+      "name": "description",
+      "type": "textarea",
+      "new_lines": "br"
+    },
+    {
+      "key": "field_shn_hebergement_link_label",
+      "label": "Libellé lien",
+      "name": "link_label",
+      "type": "text",
+      "default_value": "Découvrir"
+    },
+    {
+      "key": "field_shn_hebergement_link_url",
+      "label": "URL lien",
+      "name": "link_url",
+      "type": "url"
+    },
+    {
+      "key": "field_shn_hebergement_target_blank",
+      "label": "Nouvel onglet",
+      "name": "target_blank",
+      "type": "true_false",
+      "ui": 1,
+      "default_value": 1
+    },
+    {
+      "key": "field_shn_hebergement_display_order",
+      "label": "Ordre d’affichage",
+      "name": "display_order",
+      "type": "number",
+      "default_value": 0
+    }
+  ],
+  "location": [
+    [
+      {
+        "param": "post_type",
+        "operator": "==",
+        "value": "hebergement"
+      }
+    ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": true,
+  "description": "",
+  "show_in_rest": 0,
+  "modified": 1786320000
+}
