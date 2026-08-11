@@ -18,7 +18,10 @@ function tealforge_get_context(): array
 
     $context['menus'] = [
         'primary' => has_nav_menu('primary') ? Timber\Timber::get_menu('primary') : null,
-        'footer' => has_nav_menu('footer') ? Timber\Timber::get_menu('footer') : null,
+        'footer_accommodations' => has_nav_menu('footer_accommodations') ? Timber\Timber::get_menu('footer_accommodations') : null,
+        'footer_experiences' => has_nav_menu('footer_experiences') ? Timber\Timber::get_menu('footer_experiences') : null,
+        'footer_group' => has_nav_menu('footer_group') ? Timber\Timber::get_menu('footer_group') : null,
+        'footer_legal' => has_nav_menu('footer_legal') ? Timber\Timber::get_menu('footer_legal') : null,
     ];
 
     $context['options'] = tealforge_get_site_options();
@@ -37,6 +40,10 @@ function tealforge_get_site_options(): array
         'logo_header_dark' => tealforge_prepare_image_value(get_field('logo_header_dark', 'option')),
         'logo_hero' => tealforge_prepare_image_value(get_field('logo_hero', 'option')),
         'logo_footer' => tealforge_prepare_image_value(get_field('logo_footer', 'option')),
+        'footer_credit_link' => tealforge_prepare_link_field(get_field('footer_credit_link', 'option')),
+        'footer_legal_notice_link' => tealforge_prepare_link_field(get_field('footer_legal_notice_link', 'option')),
+        'footer_privacy_link' => tealforge_prepare_link_field(get_field('footer_privacy_link', 'option')),
+        'footer_cookies_link' => tealforge_prepare_link_field(get_field('footer_cookies_link', 'option')),
     ];
 }
 

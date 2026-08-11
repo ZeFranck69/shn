@@ -1,6 +1,6 @@
 {
   "key": "group_shn_one_page",
-  "title": "SHN - One page",
+  "title": "SHN - Sections de page",
   "fields": [
     {
       "key": "field_shn_page_sections",
@@ -597,6 +597,42 @@
           ]
         },
         "layout_shn_contact": {
+          "key": "layout_shn_text_content",
+          "name": "text_content",
+          "label": "Contenu texte",
+          "display": "block",
+          "sub_fields": [
+            {
+              "key": "field_shn_text_content_anchor_id",
+              "label": "Ancre",
+              "name": "anchor_id",
+              "type": "text"
+            },
+            {
+              "key": "field_shn_text_content_eyebrow",
+              "label": "Surtitre",
+              "name": "eyebrow",
+              "type": "text"
+            },
+            {
+              "key": "field_shn_text_content_title",
+              "label": "Titre",
+              "name": "title",
+              "type": "textarea",
+              "new_lines": "br"
+            },
+            {
+              "key": "field_shn_text_content_content",
+              "label": "Contenu",
+              "name": "content",
+              "type": "wysiwyg",
+              "tabs": "visual",
+              "toolbar": "basic",
+              "media_upload": 0
+            }
+          ]
+        },
+        "layout_shn_contact": {
           "key": "layout_shn_contact",
           "name": "contact",
           "label": "Contact",
@@ -679,9 +715,9 @@
   "location": [
     [
       {
-        "param": "page_type",
+        "param": "post_type",
         "operator": "==",
-        "value": "front_page"
+        "value": "page"
       }
     ]
   ],
@@ -694,5 +730,5 @@
   "active": true,
   "description": "",
   "show_in_rest": 0,
-  "modified": 1786343952
+  "modified": 1786409548
 }

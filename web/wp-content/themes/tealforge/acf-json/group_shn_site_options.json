@@ -41,6 +41,38 @@
             "return_format": "array",
             "preview_size": "medium",
             "library": "all"
+        },
+        {
+            "key": "field_shn_footer_credit_link",
+            "label": "Lien crédit footer",
+            "name": "footer_credit_link",
+            "type": "link",
+            "instructions": "Lien affiché sur \"Made in New Cal by Tealforge\". Si vide, la ligne n'est pas affichée.",
+            "return_format": "array"
+        },
+        {
+            "key": "field_shn_footer_legal_notice_link",
+            "label": "Lien mentions légales",
+            "name": "footer_legal_notice_link",
+            "type": "link",
+            "instructions": "Si vide, le lien n'est pas affiché dans le footer.",
+            "return_format": "array"
+        },
+        {
+            "key": "field_shn_footer_privacy_link",
+            "label": "Lien politique de confidentialité",
+            "name": "footer_privacy_link",
+            "type": "link",
+            "instructions": "Si vide, le lien n'est pas affiché dans le footer.",
+            "return_format": "array"
+        },
+        {
+            "key": "field_shn_footer_cookies_link",
+            "label": "Lien gestion des cookies",
+            "name": "footer_cookies_link",
+            "type": "link",
+            "instructions": "Si vide, le lien n'est pas affiché dans le footer.",
+            "return_format": "array"
         }
     ],
     "location": [
@@ -61,5 +93,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1785720000
+    "modified": 1786409548
 }

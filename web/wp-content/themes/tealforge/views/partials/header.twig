@@ -24,11 +24,21 @@
         </a>
 
         <nav class="tf-site-header__nav" aria-label="Navigation principale" data-tf-menu-panel>
-            <a href="#groupe">Le groupe</a>
-            <a href="#destinations">Destinations</a>
-            <a href="#hebergements">Hébergements</a>
-            <a href="#experiences">Expériences</a>
-            <a href="#contact">Contact</a>
+            {% if menus.primary and menus.primary.items %}
+                {% for item in menus.primary.items %}
+                    <a
+                        href="{{ item.link|e('html_attr') }}"
+                        {% if item.target and item.target != '_self' %}target="{{ item.target|e('html_attr') }}"{% if item.target == '_blank' %} rel="noopener"{% endif %}{% endif %}
+                    >
+                        {{ item.title }}
+                    </a>
+                {% endfor %}
+            {% else %}
+                <a href="#groupe">Le groupe</a>
+                <a href="#hebergements">Hébergements</a>
+                <a href="#experiences">Expériences</a>
+                <a href="#contact">Contact</a>
+            {% endif %}
         </nav>
 
         <div class="tf-site-header__right">

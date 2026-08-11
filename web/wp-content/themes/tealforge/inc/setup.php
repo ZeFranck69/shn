@@ -15,7 +15,10 @@ function tealforge_setup(): void
 
     register_nav_menus([
         'primary' => __('Menu principal', 'tealforge'),
-        'footer' => __('Menu pied de page', 'tealforge'),
+        'footer_accommodations' => __('Footer - Hébergements', 'tealforge'),
+        'footer_experiences' => __('Footer - Expériences', 'tealforge'),
+        'footer_group' => __('Footer - Le groupe', 'tealforge'),
+        'footer_legal' => __('Footer - Liens légaux', 'tealforge'),
     ]);
 }
 

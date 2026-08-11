@@ -20,32 +20,56 @@
             <div>
                 <h4>Hébergements</h4>
                 <ul>
-                    <li><a href="https://www.marriott.com/fr/hôtels/nousr-le-domaine-noumea-series/overview/" target="_blank" rel="noopener">Le Domaine Nouméa</a></li>
-                    <li><a href="https://www.marriott.com/fr/hôtels/noudr-le-domaine-deva-series/overview/" target="_blank" rel="noopener">Le Domaine Déva</a></li>
-                    <li><a href="https://www.residencedeva.nc" target="_blank" rel="noopener">La Résidence Déva</a></li>
-                    <li><a href="https://www.marriott.com/fr/hôtels/ilpse-le-domaine-oro-series/overview/" target="_blank" rel="noopener">Le Domaine Oro</a></li>
-                    <li><a href="https://www.ourelodge.nc/" target="_blank" rel="noopener">Le Domaine Kanuméra</a></li>
+                    {% if menus.footer_accommodations and menus.footer_accommodations.items %}
+                        {% for item in menus.footer_accommodations.items %}
+                            <li>
+                                <a href="{{ item.link|e('html_attr') }}" {% if item.target and item.target != '_self' %}target="{{ item.target|e('html_attr') }}"{% if item.target == '_blank' %} rel="noopener"{% endif %}{% endif %}>{{ item.title }}</a>
+                            </li>
+                        {% endfor %}
+                    {% else %}
+                        <li><a href="https://www.marriott.com/fr/hôtels/nousr-le-domaine-noumea-series/overview/" target="_blank" rel="noopener">Le Domaine Nouméa</a></li>
+                        <li><a href="https://www.marriott.com/fr/hôtels/noudr-le-domaine-deva-series/overview/" target="_blank" rel="noopener">Le Domaine Déva</a></li>
+                        <li><a href="https://www.residencedeva.nc" target="_blank" rel="noopener">La Résidence Déva</a></li>
+                        <li><a href="https://www.marriott.com/fr/hôtels/ilpse-le-domaine-oro-series/overview/" target="_blank" rel="noopener">Le Domaine Oro</a></li>
+                        <li><a href="https://www.ourelodge.nc/" target="_blank" rel="noopener">Le Domaine Kanuméra</a></li>
+                    {% endif %}
                 </ul>
             </div>
 
             <div>
                 <h4>Expériences</h4>
                 <ul>
-                    <li><a href="https://www.ileauxcanards.nc/" target="_blank" rel="noopener">Île aux Canards</a></li>
-                    <li><a href="https://deepnature.nc/" target="_blank" rel="noopener">Deep Nature Spa</a></li>
-                    <li><a href="https://www.exclusivgolf-deva.com/" target="_blank" rel="noopener">Golf de Déva</a></li>
-                    <li><a href="https://www.gardengolf-dumbea.com/" target="_blank" rel="noopener">Golf de Dumbéa</a></li>
-                    <li><a href="https://casinodenoumea.nc/" target="_blank" rel="noopener">Casinos de Nouméa</a></li>
+                    {% if menus.footer_experiences and menus.footer_experiences.items %}
+                        {% for item in menus.footer_experiences.items %}
+                            <li>
+                                <a href="{{ item.link|e('html_attr') }}" {% if item.target and item.target != '_self' %}target="{{ item.target|e('html_attr') }}"{% if item.target == '_blank' %} rel="noopener"{% endif %}{% endif %}>{{ item.title }}</a>
+                            </li>
+                        {% endfor %}
+                    {% else %}
+                        <li><a href="https://www.ileauxcanards.nc/" target="_blank" rel="noopener">Île aux Canards</a></li>
+                        <li><a href="https://deepnature.nc/" target="_blank" rel="noopener">Deep Nature Spa</a></li>
+                        <li><a href="https://www.exclusivgolf-deva.com/" target="_blank" rel="noopener">Golf de Déva</a></li>
+                        <li><a href="https://www.gardengolf-dumbea.com/" target="_blank" rel="noopener">Golf de Dumbéa</a></li>
+                        <li><a href="https://casinodenoumea.nc/" target="_blank" rel="noopener">Casinos de Nouméa</a></li>
+                    {% endif %}
                 </ul>
             </div>
 
             <div>
                 <h4>Le groupe</h4>
                 <ul>
-                    <li><a href="#groupe">Notre histoire</a></li>
-                    <li><a href="#destinations">Nos destinations</a></li>
-                    <li><a href="#contact">Nous contacter</a></li>
-                    <li><a href="#contact">Recrutement</a></li>
+                    {% if menus.footer_group and menus.footer_group.items %}
+                        {% for item in menus.footer_group.items %}
+                            <li>
+                                <a href="{{ item.link|e('html_attr') }}" {% if item.target and item.target != '_self' %}target="{{ item.target|e('html_attr') }}"{% if item.target == '_blank' %} rel="noopener"{% endif %}{% endif %}>{{ item.title }}</a>
+                            </li>
+                        {% endfor %}
+                    {% else %}
+                        <li><a href="#groupe">Notre histoire</a></li>
+                        <li><a href="#hebergements">Nos hébergements</a></li>
+                        <li><a href="#experiences">Nos expériences</a></li>
+                        <li><a href="#contact">Nous contacter</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
@@ -53,13 +77,32 @@
         <div class="tf-site-footer__bottom">
             <div class="tf-site-footer__credits">
                 <p>&copy; {{ 'now'|date('Y') }} Le Domaine du Pacifique. Tous droits réservés.</p>
-                <p>🌴 Made in New Cal by <a href="https://www.tealforge.com/" target="_blank" rel="noopener">Tealforge</a></p>
+                {% if options.footer_credit_link %}
+                    <p>
+                        🌴 Made in New Cal by
+                        <a
+                            href="{{ options.footer_credit_link.url|e('html_attr') }}"
+                            {% if options.footer_credit_link.target and options.footer_credit_link.target != '_self' %}target="{{ options.footer_credit_link.target|e('html_attr') }}"{% if options.footer_credit_link.target == '_blank' %} rel="noopener"{% endif %}{% endif %}
+                        >
+                            {{ options.footer_credit_link.title ?: 'Tealforge' }}
+                        </a>
+                    </p>
+                {% endif %}
             </div>
-            <nav aria-label="Liens légaux">
-                <a href="#">Mentions légales</a>
-                <a href="#">Politique de confidentialité</a>
-                <a href="#">Gestion des cookies</a>
-            </nav>
+            {% if options.footer_legal_notice_link or options.footer_privacy_link or options.footer_cookies_link %}
+                <nav aria-label="Liens légaux">
+                    {% for link in [options.footer_legal_notice_link, options.footer_privacy_link, options.footer_cookies_link] %}
+                        {% if link %}
+                            <a
+                                href="{{ link.url|e('html_attr') }}"
+                                {% if link.target and link.target != '_self' %}target="{{ link.target|e('html_attr') }}"{% if link.target == '_blank' %} rel="noopener"{% endif %}{% endif %}
+                            >
+                                {{ link.title }}
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+                </nav>
+            {% endif %}
         </div>
     </div>
 </footer>

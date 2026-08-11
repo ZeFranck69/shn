@@ -1182,6 +1182,64 @@ p:last-child {
   transform: translateY(-2px);
 }
 
+.tf-text-content {
+  min-height: 60svh;
+  padding-top: clamp(8rem, 13vw, 11rem);
+}
+
+.tf-text-content__inner {
+  max-width: 760px;
+}
+
+.tf-wysiwyg {
+  color: var(--tf-ocean);
+  font-size: clamp(0.98rem, 0.35vw + 0.9rem, 1.05rem);
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+.tf-wysiwyg > * + * {
+  margin-top: 1.15rem;
+}
+
+.tf-wysiwyg h2,
+.tf-wysiwyg h3 {
+  margin-top: 2.4rem;
+  color: var(--tf-ocean);
+}
+
+.tf-wysiwyg h2 {
+  font-size: clamp(1.25rem, 2vw, 1.7rem);
+  letter-spacing: 0.04em;
+  line-height: 1.28;
+}
+
+.tf-wysiwyg h3 {
+  font-size: clamp(1.05rem, 1.35vw, 1.25rem);
+  letter-spacing: 0.04em;
+  line-height: 1.28;
+}
+
+.tf-wysiwyg ul,
+.tf-wysiwyg ol {
+  padding-left: 1.2rem;
+}
+
+.tf-wysiwyg li + li {
+  margin-top: 0.45rem;
+}
+
+.tf-wysiwyg a {
+  color: var(--tf-vermeil);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  transition: color var(--tf-duration) var(--tf-ease);
+}
+
+.tf-wysiwyg a:hover {
+  color: #c9482a;
+}
+
 .tf-site-footer {
   background: #022b36;
   color: rgba(244, 236, 233, 0.72);

@@ -1,0 +1,20 @@
+<section class="tf-section tf-text-content"{% if section.anchor_id %} id="{{ section.anchor_id|e('html_attr') }}"{% endif %}>
+    <div class="tf-container">
+        <div class="tf-text-content__inner reveal">
+            {% if section.eyebrow %}
+                <p class="tf-eyebrow">{{ section.eyebrow }}</p>
+            {% endif %}
+
+            {% if section.title %}
+                <h1 class="tf-h2">{{ section.title|raw }}</h1>
+                <div class="tf-rule" aria-hidden="true"></div>
+            {% endif %}
+
+            {% if section.content %}
+                <div class="tf-wysiwyg">
+                    {{ section.content|raw }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>

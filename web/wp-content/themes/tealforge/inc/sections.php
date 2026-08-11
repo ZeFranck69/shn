@@ -114,6 +114,13 @@ function tealforge_prepare_shn_section(array $row): ?array
             'infos' => tealforge_prepare_contact_infos($row['infos'] ?? []),
             'wpforms_id' => absint($row['wpforms_id'] ?? 0),
         ],
+        'text_content' => [
+            'layout' => 'text-content',
+            'anchor_id' => tealforge_prepare_anchor($row['anchor_id'] ?? ''),
+            'eyebrow' => sanitize_text_field((string) ($row['eyebrow'] ?? '')),
+            'title' => wp_kses_post((string) ($row['title'] ?? '')),
+            'content' => wp_kses_post((string) ($row['content'] ?? '')),
+        ],
         default => null,
     };
 }
