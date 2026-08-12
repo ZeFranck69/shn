@@ -10,11 +10,26 @@
         {% for item in section.items %}
             <article class="tf-asset reveal{% if item.reverse %} tf-asset--reverse{% endif %}">
                 <div class="tf-asset__media">
-                    {% include 'components/visual.twig' with {
-                        image: item.image,
-                        note: item.image_note,
-                        dark: false
-                    } only %}
+                    {% if item.link_url %}
+                        <a
+                            class="tf-asset__media-link"
+                            href="{{ item.link_url|e('html_attr') }}"
+                            aria-label="{{ item.link_label ?: item.title }}"
+                            {% if item.target_blank %}target="_blank" rel="noopener"{% endif %}
+                        >
+                            {% include 'components/visual.twig' with {
+                                image: item.image,
+                                note: item.image_note,
+                                dark: false
+                            } only %}
+                        </a>
+                    {% else %}
+                        {% include 'components/visual.twig' with {
+                            image: item.image,
+                            note: item.image_note,
+                            dark: false
+                        } only %}
+                    {% endif %}
                 </div>
 
                 <div class="tf-asset__body">

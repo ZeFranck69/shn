@@ -4,17 +4,26 @@ declare(strict_types=1);
 
 defined('ABSPATH') || exit;
 
+const TEALFORGE_ADMIN_LOGO_URL = 'https://ledomainedupacifique.tealforge.dsp.nc/wp-content/uploads/2026/08/Le-Domaine-du-Pacifique_logo_Logo-primaire_horizontal_sable-1-scaled.webp';
+const TEALFORGE_LOGIN_LOGO_URL = 'https://ledomainedupacifique.tealforge.dsp.nc/wp-content/uploads/2026/08/Le-Domaine-du-Pacifique_logo_Logo-primaire_vertical_sable-scaled.webp';
+
 function tealforge_get_admin_logo(): ?array
 {
     if (! function_exists('get_field')) {
-        return null;
+        return [
+            'url' => TEALFORGE_ADMIN_LOGO_URL,
+            'alt' => 'Le Domaine du Pacifique',
+        ];
     }
 
     $logo = get_field('logo_header_dark', 'option')
         ?: get_field('logo_header_light', 'option')
         ?: get_field('logo_footer', 'option');
 
-    return tealforge_prepare_image_value($logo);
+    return tealforge_prepare_image_value($logo) ?: [
+        'url' => TEALFORGE_ADMIN_LOGO_URL,
+        'alt' => 'Le Domaine du Pacifique',
+    ];
 }
 
 function tealforge_admin_styles(): void
@@ -140,3 +149,120 @@ function tealforge_admin_styles(): void
 }
 
 add_action('admin_head', 'tealforge_admin_styles');
+
+function tealforge_login_styles(): void
+{
+    ?>
+    <style id="tealforge-login-styles">
+        :root {
+            --tf-login-ocean: #033744;
+            --tf-login-ocean-dark: #022b36;
+            --tf-login-vermeil: #e55938;
+            --tf-login-lagon: #84d1bf;
+            --tf-login-sable: #f4ece9;
+            --tf-login-white: #ffffff;
+        }
+
+        body.login {
+            min-height: 100vh;
+            background:
+                radial-gradient(120% 90% at 20% 10%, rgba(132, 209, 191, 0.18) 0%, rgba(132, 209, 191, 0) 55%),
+                linear-gradient(155deg, #06485a 0%, var(--tf-login-ocean) 56%, var(--tf-login-ocean-dark) 100%);
+            color: var(--tf-login-sable);
+            font-family: "Nunito Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
+        .login #login {
+            width: min(420px, calc(100% - 40px));
+            padding-top: clamp(52px, 8vh, 90px);
+        }
+
+        .login h1 a {
+            width: 240px;
+            height: 178px;
+            margin-bottom: 28px;
+            background-image: url("<?php echo esc_url(TEALFORGE_LOGIN_LOGO_URL); ?>");
+            background-position: center;
+            background-size: contain;
+        }
+
+        .login form {
+            border: 1px solid rgba(132, 209, 191, 0.22);
+            border-radius: 0;
+            background: rgba(244, 236, 233, 0.96);
+            box-shadow: 0 24px 70px rgba(2, 43, 54, 0.28);
+            color: var(--tf-login-ocean);
+        }
+
+        .login label {
+            color: rgba(3, 55, 68, 0.72);
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+        }
+
+        .login form .input,
+        .login input[type="text"] {
+            border: 1px solid rgba(3, 55, 68, 0.16);
+            border-radius: 0;
+            background: var(--tf-login-white);
+            color: var(--tf-login-ocean);
+            font-size: 1rem;
+            box-shadow: none;
+        }
+
+        .login form .input:focus,
+        .login input[type="text"]:focus {
+            border-color: var(--tf-login-lagon);
+            box-shadow: 0 0 0 3px rgba(132, 209, 191, 0.24);
+        }
+
+        .wp-core-ui.login .button-primary {
+            border-color: var(--tf-login-vermeil);
+            border-radius: 0;
+            background: var(--tf-login-vermeil);
+            color: var(--tf-login-white);
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+        }
+
+        .wp-core-ui.login .button-primary:hover,
+        .wp-core-ui.login .button-primary:focus {
+            border-color: #c9482a;
+            background: #c9482a;
+            transform: translateY(-1px);
+        }
+
+        .login #backtoblog a,
+        .login #nav a,
+        .login .privacy-policy-page-link a {
+            color: rgba(244, 236, 233, 0.78);
+            text-decoration: none;
+        }
+
+        .login #backtoblog a:hover,
+        .login #nav a:hover,
+        .login .privacy-policy-page-link a:hover {
+            color: var(--tf-login-lagon);
+        }
+
+        .login .message,
+        .login .notice,
+        .login .success {
+            border-left-color: var(--tf-login-lagon);
+        }
+    </style>
+    <?php
+}
+
+add_action('login_head', 'tealforge_login_styles');
+
+function tealforge_login_logo_url(): string
+{
+    return home_url('/');
+}
+
+add_filter('login_headerurl', 'tealforge_login_logo_url');

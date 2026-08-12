@@ -817,6 +817,17 @@ p:last-child {
   border-top: 0;
 }
 
+.tf-asset__media-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.tf-asset__media-link:focus-visible {
+  outline: 2px solid var(--tf-vermeil);
+  outline-offset: 4px;
+}
+
 .tf-asset--reverse .tf-asset__media {
   order: 2;
 }
@@ -911,6 +922,17 @@ p:last-child {
   transform: scale(1.035);
 }
 
+.tf-experience-card__media-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.tf-experience-card__media-link:focus-visible {
+  outline: 2px solid var(--tf-vermeil);
+  outline-offset: 4px;
+}
+
 .tf-experience-card .tf-visual {
   width: 100%;
   min-height: 0;
@@ -954,8 +976,14 @@ p:last-child {
   grid-column: span 2;
 }
 
-.tf-experience-card--wide .tf-visual {
+.tf-experience-card--wide .tf-experience-card__media-link {
+  display: flex;
   flex: 0 0 48%;
+  align-self: stretch;
+}
+
+.tf-experience-card--wide .tf-visual {
+  flex: 1;
   align-self: stretch;
   aspect-ratio: auto;
   border-right: 1px solid var(--tf-ocean-12);
@@ -1411,6 +1439,11 @@ p:last-child {
   .tf-experience-card--wide {
     flex-direction: column;
     grid-column: auto;
+  }
+
+  .tf-experience-card--wide .tf-experience-card__media-link {
+    flex: none;
+    align-self: auto;
   }
 
   .tf-experience-card--wide .tf-visual {

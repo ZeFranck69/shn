@@ -10,11 +10,26 @@
         <div class="tf-experiences__grid">
             {% for item in section.items %}
                 <article class="tf-experience-card reveal{% if item.layout_variant == 'wide' %} tf-experience-card--wide{% endif %}">
-                    {% include 'components/visual.twig' with {
-                        image: item.image,
-                        note: item.image_note,
-                        dark: false
-                    } only %}
+                    {% if item.link_url %}
+                        <a
+                            class="tf-experience-card__media-link"
+                            href="{{ item.link_url|e('html_attr') }}"
+                            aria-label="{{ item.link_label ?: item.title }}"
+                            {% if item.target_blank %}target="_blank" rel="noopener"{% endif %}
+                        >
+                            {% include 'components/visual.twig' with {
+                                image: item.image,
+                                note: item.image_note,
+                                dark: false
+                            } only %}
+                        </a>
+                    {% else %}
+                        {% include 'components/visual.twig' with {
+                            image: item.image,
+                            note: item.image_note,
+                            dark: false
+                        } only %}
+                    {% endif %}
 
                     <div class="tf-experience-card__body">
                         <p class="tf-place">{{ item.place }}</p>
