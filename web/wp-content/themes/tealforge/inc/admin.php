@@ -4,23 +4,12 @@ declare(strict_types=1);
 
 defined('ABSPATH') || exit;
 
-const TEALFORGE_ADMIN_LOGO_URL = 'https://ledomainedupacifique.tealforge.dsp.nc/wp-content/uploads/2026/08/Le-Domaine-du-Pacifique_logo_Logo-primaire_horizontal_sable-1-scaled.webp';
+const TEALFORGE_ADMIN_LOGO_URL = 'https://ledomainedupacifique.tealforge.dsp.nc/wp-content/uploads/2026/08/Le-Domaine-du-Pacifique_logo_Logo-primaire_horizontal_blanc-scaled.webp';
 const TEALFORGE_LOGIN_LOGO_URL = 'https://ledomainedupacifique.tealforge.dsp.nc/wp-content/uploads/2026/08/Le-Domaine-du-Pacifique_logo_Logo-primaire_vertical_sable-scaled.webp';
 
 function tealforge_get_admin_logo(): ?array
 {
-    if (! function_exists('get_field')) {
-        return [
-            'url' => TEALFORGE_ADMIN_LOGO_URL,
-            'alt' => 'Le Domaine du Pacifique',
-        ];
-    }
-
-    $logo = get_field('logo_header_dark', 'option')
-        ?: get_field('logo_header_light', 'option')
-        ?: get_field('logo_footer', 'option');
-
-    return tealforge_prepare_image_value($logo) ?: [
+    return [
         'url' => TEALFORGE_ADMIN_LOGO_URL,
         'alt' => 'Le Domaine du Pacifique',
     ];
