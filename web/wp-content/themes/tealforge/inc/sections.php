@@ -304,13 +304,19 @@ function tealforge_prepare_post_cards(array $post_ids, string $kind): array
         }
 
         $layout_variant = function_exists('get_field') ? get_field('layout_variant', $post_id) : '';
+        $title = get_the_title($post_id);
+        $prepared_image = tealforge_prepare_image_value($image);
+
+        if ($prepared_image && '' === trim((string) ($prepared_image['alt'] ?? ''))) {
+            $prepared_image['alt'] = $title;
+        }
 
         $cards[] = [
             'kind' => $kind,
-            'image' => tealforge_prepare_image_value($image),
+            'image' => $prepared_image,
             'image_note' => tealforge_get_post_field_text($post_id, 'image_note'),
             'place' => tealforge_get_post_field_text($post_id, 'place'),
-            'title' => get_the_title($post_id),
+            'title' => $title,
             'endorsement' => tealforge_get_post_field_text($post_id, 'endorsement'),
             'description' => tealforge_get_post_field_html($post_id, 'description'),
             'link_label' => tealforge_get_post_field_text($post_id, 'link_label') ?: 'Découvrir',
@@ -336,6 +342,41 @@ function tealforge_get_post_field_html(int $post_id, string $field_name): string
     $value = function_exists('get_field') ? get_field($field_name, $post_id) : '';
 
     return wp_kses_post((string) $value);
+}
+
+function tealforge_prepare_single_content_post(int $post_id, string $type): array
+{
+    $is_experience = 'experience' === $type;
+    $image = function_exists('get_field') ? get_field('image', $post_id) : null;
+    $title = get_the_title($post_id);
+
+    if (! $image && has_post_thumbnail($post_id)) {
+        $image = get_post_thumbnail_id($post_id);
+    }
+
+    $prepared_image = tealforge_prepare_image_value($image);
+
+    if ($prepared_image && '' === trim((string) ($prepared_image['alt'] ?? ''))) {
+        $prepared_image['alt'] = $title;
+    }
+
+    return [
+        'type' => $is_experience ? 'experience' : 'hebergement',
+        'type_label' => $is_experience ? 'Expérience' : 'Hébergement',
+        'back_label' => $is_experience ? 'Toutes les expériences' : 'Tous les hébergements',
+        'back_url' => home_url($is_experience ? '/#experiences' : '/#hebergements'),
+        'title' => $title,
+        'excerpt' => wp_kses_post((string) get_the_excerpt($post_id)),
+        'content' => apply_filters('the_content', (string) get_post_field('post_content', $post_id)),
+        'image' => $prepared_image,
+        'image_note' => tealforge_get_post_field_text($post_id, 'image_note'),
+        'place' => tealforge_get_post_field_text($post_id, 'place'),
+        'endorsement' => tealforge_get_post_field_text($post_id, 'endorsement'),
+        'description' => tealforge_get_post_field_html($post_id, 'description'),
+        'link_label' => tealforge_get_post_field_text($post_id, 'link_label') ?: 'Découvrir',
+        'link_url' => esc_url((string) (function_exists('get_field') ? get_field('link_url', $post_id) : '')),
+        'target_blank' => (bool) (function_exists('get_field') ? get_field('target_blank', $post_id) : true),
+    ];
 }
 
 function tealforge_prepare_contact_infos(mixed $rows): array

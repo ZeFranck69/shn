@@ -26,7 +26,7 @@ function tealforge_register_content_post_types(): void
             'with_front' => false,
         ],
         'show_in_rest' => true,
-        'supports' => ['title', 'thumbnail', 'page-attributes'],
+        'supports' => ['title', 'editor', 'excerpt', 'thumbnail', 'page-attributes'],
     ]);
 
     register_post_type('experience', [
@@ -49,7 +49,7 @@ function tealforge_register_content_post_types(): void
             'with_front' => false,
         ],
         'show_in_rest' => true,
-        'supports' => ['title', 'thumbnail', 'page-attributes'],
+        'supports' => ['title', 'editor', 'excerpt', 'thumbnail', 'page-attributes'],
     ]);
 }
 

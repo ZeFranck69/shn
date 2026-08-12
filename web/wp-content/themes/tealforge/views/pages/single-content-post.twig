@@ -1,0 +1,62 @@
+{% extends 'layouts/base.twig' %}
+
+{% block content %}
+    {% if entry %}
+        <article class="tf-single tf-single--{{ entry.type }}">
+            <div class="tf-container">
+                <a class="tf-single__back" href="{{ entry.back_url|e('html_attr') }}">
+                    <span aria-hidden="true">←</span> {{ entry.back_label }}
+                </a>
+
+                <div class="tf-single__grid">
+                    <header class="tf-single__header">
+                        <p class="tf-eyebrow">{{ entry.type_label }}</p>
+                        {% if entry.place %}
+                            <p class="tf-place">{{ entry.place }}</p>
+                        {% endif %}
+                        <h1>{{ entry.title }}</h1>
+                        {% if entry.endorsement %}
+                            <p class="tf-endorse">{{ entry.endorsement }}</p>
+                        {% endif %}
+                        <div class="tf-rule" aria-hidden="true"></div>
+                        {% if entry.excerpt %}
+                            <p class="tf-lead">{{ entry.excerpt|raw }}</p>
+                        {% elseif entry.description %}
+                            <p class="tf-lead">{{ entry.description|raw }}</p>
+                        {% endif %}
+                    </header>
+
+                    {% if entry.image %}
+                        <div class="tf-single__media">
+                            {% include 'components/visual.twig' with {
+                                image: entry.image,
+                                note: entry.image_note,
+                                dark: false
+                            } only %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="tf-single__content">
+                    {% if entry.description and entry.excerpt %}
+                        <div class="tf-wysiwyg">
+                            <p>{{ entry.description|raw }}</p>
+                        </div>
+                    {% endif %}
+
+                    {% if entry.content %}
+                        <div class="tf-wysiwyg">
+                            {{ entry.content|raw }}
+                        </div>
+                    {% endif %}
+
+                    {% if entry.link_url %}
+                        <a class="tf-btn" href="{{ entry.link_url|e('html_attr') }}" {% if entry.target_blank %}target="_blank" rel="noopener"{% endif %}>
+                            {{ entry.link_label }} <span aria-hidden="true">→</span>
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </article>
+    {% endif %}
+{% endblock %}
