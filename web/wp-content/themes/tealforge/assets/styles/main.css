@@ -1269,6 +1269,75 @@ p:last-child {
   margin-top: 2rem;
 }
 
+.tf-error-page {
+  min-height: 100svh;
+  padding-block: clamp(8rem, 13vw, 11rem) var(--tf-section);
+  background:
+    radial-gradient(90% 70% at 86% 18%, rgba(132, 209, 191, 0.18), rgba(132, 209, 191, 0) 58%),
+    linear-gradient(155deg, #06485a 0%, var(--tf-ocean) 52%, #022b36 100%);
+  color: var(--tf-sable);
+}
+
+.tf-error-page__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.82fr) minmax(220px, 0.58fr);
+  gap: clamp(2.5rem, 7vw, 7rem);
+  align-items: center;
+}
+
+.tf-error-page h1 {
+  max-width: 12ch;
+  color: var(--tf-white);
+  font-size: clamp(2.1rem, 5.4vw, 4.6rem);
+  letter-spacing: 0.04em;
+  line-height: 1.12;
+}
+
+.tf-error-page .tf-lead {
+  max-width: 48ch;
+  color: rgba(244, 236, 233, 0.86);
+}
+
+.tf-error-page__actions {
+  margin-top: 2.2rem;
+}
+
+.tf-error-page__aside {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  border: 1px solid rgba(132, 209, 191, 0.28);
+  border-radius: 999px;
+  color: rgba(244, 236, 233, 0.1);
+  font-family: var(--tf-serif);
+  font-size: clamp(5rem, 15vw, 12rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.tf-error-page__aside span {
+  transform: translateY(0.05em);
+}
+
+.tf-error-page__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 1.8rem;
+  margin-top: clamp(3rem, 6vw, 5rem);
+  padding-top: 1.6rem;
+  border-top: 1px solid rgba(132, 209, 191, 0.24);
+}
+
+.tf-error-page__links .tf-link {
+  border-bottom-color: rgba(132, 209, 191, 0.28);
+  color: var(--tf-lagon);
+}
+
+.tf-error-page__links .tf-link:hover {
+  border-bottom-color: var(--tf-lagon);
+  color: var(--tf-white);
+}
+
 .tf-text-content {
   min-height: 60svh;
   padding-top: clamp(8rem, 13vw, 11rem);
@@ -1478,6 +1547,7 @@ p:last-child {
   .tf-manifest,
   .tf-asset,
   .tf-single__grid,
+  .tf-error-page__grid,
   .tf-contact__grid {
     grid-template-columns: 1fr;
   }
@@ -1560,6 +1630,15 @@ p:last-child {
 
   .tf-single__media .tf-visual {
     min-height: 0;
+  }
+
+  .tf-error-page__aside {
+    width: min(280px, 78vw);
+    margin-inline: auto;
+  }
+
+  .tf-error-page h1 {
+    max-width: none;
   }
 
   .tf-visual figcaption {

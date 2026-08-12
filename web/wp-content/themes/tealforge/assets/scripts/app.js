@@ -53,7 +53,10 @@ const initMobileNavigation = () => {
     }
 
     toggle.setAttribute('aria-expanded', String(isOpen));
-    toggle.setAttribute('aria-label', isOpen ? 'Fermer le menu' : 'Ouvrir le menu');
+    toggle.setAttribute(
+      'aria-label',
+      isOpen ? toggle.dataset.tfMenuCloseLabel || 'Fermer le menu' : toggle.dataset.tfMenuOpenLabel || 'Ouvrir le menu',
+    );
   };
 
   toggle.addEventListener('click', () => {

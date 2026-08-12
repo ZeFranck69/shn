@@ -347,6 +347,7 @@ function tealforge_get_post_field_html(int $post_id, string $field_name): string
 function tealforge_prepare_single_content_post(int $post_id, string $type): array
 {
     $is_experience = 'experience' === $type;
+    $is_english = 'en' === tealforge_current_language();
     $image = function_exists('get_field') ? get_field('image', $post_id) : null;
     $title = get_the_title($post_id);
 
@@ -362,8 +363,12 @@ function tealforge_prepare_single_content_post(int $post_id, string $type): arra
 
     return [
         'type' => $is_experience ? 'experience' : 'hebergement',
-        'type_label' => $is_experience ? 'Expérience' : 'Hébergement',
-        'back_label' => $is_experience ? 'Toutes les expériences' : 'Tous les hébergements',
+        'type_label' => $is_experience
+            ? ($is_english ? 'Experience' : 'Expérience')
+            : ($is_english ? 'Accommodation' : 'Hébergement'),
+        'back_label' => $is_experience
+            ? ($is_english ? 'All experiences' : 'Toutes les expériences')
+            : ($is_english ? 'All accommodation' : 'Tous les hébergements'),
         'back_url' => home_url($is_experience ? '/#experiences' : '/#hebergements'),
         'title' => $title,
         'excerpt' => wp_kses_post((string) get_the_excerpt($post_id)),

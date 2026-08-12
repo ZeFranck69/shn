@@ -41,3 +41,21 @@ function tealforge_prepare_image_field(mixed $image): ?array
         'url' => wp_get_attachment_image_url($image_id, 'full'),
     ];
 }
+
+function tealforge_current_language(): string
+{
+    if (function_exists('pll_current_language')) {
+        $language = pll_current_language('slug');
+
+        if (is_string($language) && '' !== $language) {
+            return $language;
+        }
+    }
+
+    return 'fr';
+}
+
+function tealforge_i18n(string $fr, string $en = ''): string
+{
+    return 'en' === tealforge_current_language() && '' !== $en ? $en : $fr;
+}

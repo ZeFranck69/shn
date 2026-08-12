@@ -2,32 +2,39 @@
 
 {% block content %}
     <section class="tf-error-page" aria-labelledby="tf-error-page-title">
-        <div class="tf-error-page__inner">
-            <p class="tf-error-page__code" aria-hidden="true">404</p>
+        <div class="tf-container">
+            <div class="tf-error-page__grid">
+                <div class="tf-error-page__content">
+                    <p class="tf-eyebrow">{{ function('tealforge_i18n', 'Page introuvable', 'Page not found') }}</p>
 
-            <div class="tf-error-page__content">
-                <p class="tf-error-page__eyebrow">
-                    {{ function('__', 'Page introuvable', 'tealforge') }}
-                </p>
+                    <h1 id="tf-error-page-title">
+                        {{ function('tealforge_i18n', 'Cette escale n’existe plus.', 'This stopover no longer exists.') }}
+                    </h1>
 
-                <h1 id="tf-error-page-title" class="tf-error-page__title">
-                    {{ function('__', 'Cette page semble avoir disparu.', 'tealforge') }}
-                </h1>
+                    <div class="tf-rule" aria-hidden="true"></div>
 
-                <p class="tf-error-page__text">
-                    {{ function('__', 'Le lien utilise est peut-etre incorrect, ou la page a ete deplacee. Vous pouvez revenir a l accueil ou reprendre votre navigation.', 'tealforge') }}
-                </p>
+                    <p class="tf-lead">
+                        {{ function('tealforge_i18n', 'Le lien utilisé est peut-être incorrect ou la page a été déplacée. Vous pouvez revenir à l’accueil ou rejoindre directement les grandes sections du site.', 'The link may be incorrect or the page may have moved. You can return home or jump directly to the main sections of the site.') }}
+                    </p>
 
-                <div class="tf-error-page__actions">
-                    <a class="tf-button" href="{{ function('esc_url', site.url) }}">
-                        {{ function('__', 'Retour a l accueil', 'tealforge') }}
-                    </a>
+                    <div class="tf-error-page__actions">
+                        <a class="tf-btn" href="{{ language_home_url|e('html_attr') }}">
+                            {{ function('tealforge_i18n', 'Retour à l’accueil', 'Back home') }} <span aria-hidden="true">→</span>
+                        </a>
+                    </div>
+                </div>
 
-                    <button class="tf-button tf-button--secondary" type="button" data-tf-history-back>
-                        {{ function('__', 'Page precedente', 'tealforge') }}
-                    </button>
+                <div class="tf-error-page__aside" aria-hidden="true">
+                    <span>404</span>
                 </div>
             </div>
+
+            <nav class="tf-error-page__links" aria-label="{{ function('tealforge_i18n', 'Navigation de secours', 'Fallback navigation') }}">
+                <a class="tf-link" href="{{ language_home_url|e('html_attr') }}#groupe">{{ function('tealforge_i18n', 'Le groupe', 'The group') }} <span aria-hidden="true">→</span></a>
+                <a class="tf-link" href="{{ language_home_url|e('html_attr') }}#hebergements">{{ function('tealforge_i18n', 'Hébergements', 'Accommodation') }} <span aria-hidden="true">→</span></a>
+                <a class="tf-link" href="{{ language_home_url|e('html_attr') }}#experiences">{{ function('tealforge_i18n', 'Expériences', 'Experiences') }} <span aria-hidden="true">→</span></a>
+                <a class="tf-link" href="{{ language_home_url|e('html_attr') }}#contact">{{ function('tealforge_i18n', 'Contact', 'Contact') }} <span aria-hidden="true">→</span></a>
+            </nav>
         </div>
     </section>
 {% endblock %}

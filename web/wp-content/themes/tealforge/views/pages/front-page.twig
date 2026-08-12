@@ -8,7 +8,7 @@
     {% else %}
         <section class="tf-content">
             <div class="tf-content__inner">
-                <p>Aucune section n'est encore configuree.</p>
+                <p>{{ function('tealforge_i18n', 'Aucune section n’est encore configurée.', 'No section has been configured yet.') }}</p>
             </div>
         </section>
     {% endfor %}

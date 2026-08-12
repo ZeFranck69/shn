@@ -2,7 +2,7 @@
     <div class="tf-container">
         <div class="tf-site-footer__top">
             <div>
-                <a class="tf-site-footer__brand" href="#accueil" aria-label="Le Domaine du Pacifique">
+                <a class="tf-site-footer__brand" href="{{ language_home_url|e('html_attr') }}#accueil" aria-label="Le Domaine du Pacifique">
                     {% if options.logo_footer %}
                         <img
                             class="tf-site-footer__logo"
@@ -14,11 +14,11 @@
                         <small>du Pacifique</small>
                     {% endif %}
                 </a>
-                <p>Resorts &amp; Expériences en Nouvelle-Calédonie. Une marque de la Société Hôtelière de Nouvelle-Calédonie.</p>
+                <p>{{ function('tealforge_i18n', 'Resorts & Expériences en Nouvelle-Calédonie. Une marque de la Société Hôtelière de Nouvelle-Calédonie.', 'Resorts & Experiences in New Caledonia. A brand of Société Hôtelière de Nouvelle-Calédonie.') }}</p>
             </div>
 
             <div>
-                <h4>Hébergements</h4>
+                <h4>{{ function('tealforge_i18n', 'Hébergements', 'Accommodation') }}</h4>
                 <ul>
                     {% if menus.footer_accommodations and menus.footer_accommodations.items %}
                         {% for item in menus.footer_accommodations.items %}
@@ -37,7 +37,7 @@
             </div>
 
             <div>
-                <h4>Expériences</h4>
+                <h4>{{ function('tealforge_i18n', 'Expériences', 'Experiences') }}</h4>
                 <ul>
                     {% if menus.footer_experiences and menus.footer_experiences.items %}
                         {% for item in menus.footer_experiences.items %}
@@ -56,7 +56,7 @@
             </div>
 
             <div>
-                <h4>Le groupe</h4>
+                <h4>{{ function('tealforge_i18n', 'Le groupe', 'The group') }}</h4>
                 <ul>
                     {% if menus.footer_group and menus.footer_group.items %}
                         {% for item in menus.footer_group.items %}
@@ -65,10 +65,10 @@
                             </li>
                         {% endfor %}
                     {% else %}
-                        <li><a href="#groupe">Notre histoire</a></li>
-                        <li><a href="#hebergements">Nos hébergements</a></li>
-                        <li><a href="#experiences">Nos expériences</a></li>
-                        <li><a href="#contact">Nous contacter</a></li>
+                        <li><a href="{{ language_home_url|e('html_attr') }}#groupe">{{ function('tealforge_i18n', 'Notre histoire', 'Our story') }}</a></li>
+                        <li><a href="{{ language_home_url|e('html_attr') }}#hebergements">{{ function('tealforge_i18n', 'Nos hébergements', 'Our accommodation') }}</a></li>
+                        <li><a href="{{ language_home_url|e('html_attr') }}#experiences">{{ function('tealforge_i18n', 'Nos expériences', 'Our experiences') }}</a></li>
+                        <li><a href="{{ language_home_url|e('html_attr') }}#contact">{{ function('tealforge_i18n', 'Nous contacter', 'Contact us') }}</a></li>
                     {% endif %}
                 </ul>
             </div>
@@ -76,7 +76,7 @@
 
         <div class="tf-site-footer__bottom">
             <div class="tf-site-footer__credits">
-                <p>&copy; {{ 'now'|date('Y') }} Le Domaine du Pacifique. Tous droits réservés.</p>
+                <p>&copy; {{ 'now'|date('Y') }} Le Domaine du Pacifique. {{ function('tealforge_i18n', 'Tous droits réservés.', 'All rights reserved.') }}</p>
                 {% if options.footer_credit_link %}
                     <p>
                         🌴 Made in New Cal by

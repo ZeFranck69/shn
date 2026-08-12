@@ -25,6 +25,17 @@ function tealforge_get_context(): array
     ];
 
     $context['options'] = tealforge_get_site_options();
+    $context['current_language'] = tealforge_current_language();
+    $context['language_home_url'] = function_exists('pll_home_url') ? pll_home_url($context['current_language']) : home_url('/');
+    $context['language_switcher'] = function_exists('pll_the_languages')
+        ? pll_the_languages([
+            'raw' => 1,
+            'hide_current' => 0,
+            'hide_if_empty' => 0,
+            'show_flags' => 0,
+            'show_names' => 0,
+        ])
+        : [];
 
     return $context;
 }
