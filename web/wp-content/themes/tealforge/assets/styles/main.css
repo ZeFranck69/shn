@@ -546,6 +546,43 @@ p:last-child {
   background: linear-gradient(var(--tf-lagon), transparent);
 }
 
+.tf-page-hero {
+  display: grid;
+  min-height: 420px;
+  padding-top: 7.5rem;
+  background:
+    radial-gradient(90% 80% at 80% 15%, rgba(132, 209, 191, 0.16), rgba(132, 209, 191, 0) 58%),
+    linear-gradient(155deg, #06485a 0%, var(--tf-ocean) 54%, #022b36 100%);
+  color: var(--tf-sable);
+  place-items: center;
+}
+
+.tf-page-hero--compact {
+  min-height: 320px;
+}
+
+.tf-page-hero--large {
+  min-height: 520px;
+}
+
+.tf-page-hero__content {
+  max-width: 760px;
+  padding-block: clamp(3rem, 7vw, 5.5rem);
+}
+
+.tf-page-hero .tf-eyebrow {
+  color: var(--tf-lagon);
+}
+
+.tf-page-hero h1 {
+  max-width: 13ch;
+  margin: 0;
+  color: var(--tf-white);
+  font-size: clamp(2.2rem, 5.2vw, 4.6rem);
+  letter-spacing: 0.04em;
+  line-height: 1.08;
+}
+
 .tf-brand-mark {
   display: block;
   width: clamp(190px, 22vw, 278px);
@@ -1361,6 +1398,10 @@ p:last-child {
 .tf-text-content {
   min-height: 60svh;
   padding-top: clamp(8rem, 13vw, 11rem);
+}
+
+.tf-page-hero + .tf-text-content {
+  padding-top: clamp(3.5rem, 7vw, 6rem);
 }
 
 .tf-text-content__inner {

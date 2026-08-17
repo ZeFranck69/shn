@@ -121,6 +121,47 @@
             }
           ]
         },
+        "layout_shn_page_hero": {
+          "key": "layout_shn_page_hero",
+          "name": "page_hero",
+          "label": "Hero page intérieure",
+          "display": "block",
+          "sub_fields": [
+            {
+              "key": "field_shn_page_hero_anchor_id",
+              "label": "Ancre",
+              "name": "anchor_id",
+              "type": "text"
+            },
+            {
+              "key": "field_shn_page_hero_eyebrow",
+              "label": "Surtitre",
+              "name": "eyebrow",
+              "type": "text"
+            },
+            {
+              "key": "field_shn_page_hero_title",
+              "label": "Titre",
+              "name": "title",
+              "type": "textarea",
+              "new_lines": "br"
+            },
+            {
+              "key": "field_shn_page_hero_height",
+              "label": "Hauteur",
+              "name": "height",
+              "type": "select",
+              "choices": {
+                "compact": "Compacte",
+                "standard": "Standard",
+                "large": "Grande"
+              },
+              "default_value": "standard",
+              "return_format": "value",
+              "ui": 1
+            }
+          ]
+        },
         "layout_shn_manifest": {
           "key": "layout_shn_manifest",
           "name": "manifest",
@@ -732,5 +773,5 @@
   "active": true,
   "description": "",
   "show_in_rest": 0,
-  "modified": 1786943133
+  "modified": 1786944282
 }

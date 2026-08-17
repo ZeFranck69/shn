@@ -49,6 +49,13 @@ function tealforge_prepare_shn_section(array $row): ?array
             'scroll_label' => sanitize_text_field((string) ($row['scroll_label'] ?? 'Découvrir')),
             'scroll_target' => esc_url((string) ($row['scroll_target'] ?? '#groupe')),
         ],
+        'page_hero' => [
+            'layout' => 'page-hero',
+            'anchor_id' => tealforge_prepare_anchor($row['anchor_id'] ?? ''),
+            'eyebrow' => sanitize_text_field((string) ($row['eyebrow'] ?? '')),
+            'title' => wp_kses_post((string) ($row['title'] ?? '')),
+            'height' => tealforge_prepare_page_hero_height($row['height'] ?? 'standard'),
+        ],
         'manifest' => [
             'layout' => 'manifest',
             'anchor_id' => tealforge_prepare_anchor($row['anchor_id'] ?? 'groupe'),
@@ -123,6 +130,13 @@ function tealforge_prepare_shn_section(array $row): ?array
         ],
         default => null,
     };
+}
+
+function tealforge_prepare_page_hero_height(mixed $value): string
+{
+    $height = sanitize_key((string) $value);
+
+    return in_array($height, ['compact', 'standard', 'large'], true) ? $height : 'standard';
 }
 
 function tealforge_prepare_anchor(mixed $value): string

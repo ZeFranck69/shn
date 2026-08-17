@@ -1,0 +1,13 @@
+<section class="tf-page-hero tf-page-hero--{{ section.height ?: 'standard' }}"{% if section.anchor_id %} id="{{ section.anchor_id|e('html_attr') }}"{% endif %}>
+    <div class="tf-container">
+        <div class="tf-page-hero__content reveal">
+            {% if section.eyebrow %}
+                <p class="tf-eyebrow">{{ section.eyebrow }}</p>
+            {% endif %}
+
+            {% if section.title %}
+                <h1>{{ section.title|raw }}</h1>
+            {% endif %}
+        </div>
+    </div>
+</section>
