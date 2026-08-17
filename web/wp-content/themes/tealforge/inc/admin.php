@@ -139,6 +139,33 @@ function tealforge_admin_styles(): void
 
 add_action('admin_head', 'tealforge_admin_styles');
 
+function tealforge_classic_editor_post_types(): array
+{
+    return ['page', 'hebergement', 'experience'];
+}
+
+function tealforge_disable_block_editor_for_post_type(bool $use_block_editor, string $post_type): bool
+{
+    if (in_array($post_type, tealforge_classic_editor_post_types(), true)) {
+        return false;
+    }
+
+    return $use_block_editor;
+}
+
+add_filter('use_block_editor_for_post_type', 'tealforge_disable_block_editor_for_post_type', 10, 2);
+
+function tealforge_disable_block_editor_for_post(bool $use_block_editor, WP_Post $post): bool
+{
+    if (in_array($post->post_type, tealforge_classic_editor_post_types(), true)) {
+        return false;
+    }
+
+    return $use_block_editor;
+}
+
+add_filter('use_block_editor_for_post', 'tealforge_disable_block_editor_for_post', 10, 2);
+
 function tealforge_login_styles(): void
 {
     ?>

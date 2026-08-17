@@ -319,6 +319,7 @@ function tealforge_prepare_post_cards(array $post_ids, string $kind): array
             'title' => $title,
             'endorsement' => tealforge_get_post_field_text($post_id, 'endorsement'),
             'description' => tealforge_get_post_field_html($post_id, 'description'),
+            'availability_label' => tealforge_get_post_field_text($post_id, 'availability_label'),
             'link_label' => tealforge_get_post_field_text($post_id, 'link_label') ?: 'Découvrir',
             'link_url' => esc_url((string) (function_exists('get_field') ? get_field('link_url', $post_id) : '')),
             'target_blank' => (bool) (function_exists('get_field') ? get_field('target_blank', $post_id) : true),
@@ -378,6 +379,7 @@ function tealforge_prepare_single_content_post(int $post_id, string $type): arra
         'place' => tealforge_get_post_field_text($post_id, 'place'),
         'endorsement' => tealforge_get_post_field_text($post_id, 'endorsement'),
         'description' => tealforge_get_post_field_html($post_id, 'description'),
+        'availability_label' => tealforge_get_post_field_text($post_id, 'availability_label'),
         'link_label' => tealforge_get_post_field_text($post_id, 'link_label') ?: 'Découvrir',
         'link_url' => esc_url((string) (function_exists('get_field') ? get_field('link_url', $post_id) : '')),
         'target_blank' => (bool) (function_exists('get_field') ? get_field('target_blank', $post_id) : true),
@@ -401,6 +403,10 @@ function tealforge_prepare_contact_infos(mixed $rows): array
         $value = wp_kses_post((string) ($row['value'] ?? ''));
 
         if ('' === $label || '' === $value) {
+            continue;
+        }
+
+        if (in_array(sanitize_title($label), ['reseaux-sociaux', 'réseaux-sociaux', 'social-networks'], true)) {
             continue;
         }
 

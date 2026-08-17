@@ -29,7 +29,7 @@
                         href="{{ button.url|e('html_attr') }}"
                         {% if button.target_blank %}target="_blank" rel="noopener"{% endif %}
                     >
-                        {{ button.label }}{% if loop.first %}<span aria-hidden="true">→</span>{% endif %}
+                        {{ button.label }} <span aria-hidden="true">→</span>
                     </a>
                 {% endfor %}
             </div>

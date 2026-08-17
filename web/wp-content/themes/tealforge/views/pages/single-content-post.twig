@@ -50,7 +50,9 @@
                         </div>
                     {% endif %}
 
-                    {% if entry.link_url %}
+                    {% if entry.availability_label %}
+                        <p class="tf-availability tf-availability--single">{{ entry.availability_label }}</p>
+                    {% elseif entry.link_url %}
                         <a class="tf-btn" href="{{ entry.link_url|e('html_attr') }}" {% if entry.target_blank %}target="_blank" rel="noopener"{% endif %}>
                             {{ entry.link_label }} <span aria-hidden="true">→</span>
                         </a>

@@ -10,7 +10,7 @@
         {% for item in section.items %}
             <article class="tf-asset reveal{% if item.reverse %} tf-asset--reverse{% endif %}">
                 <div class="tf-asset__media">
-                    {% if item.link_url %}
+                    {% if item.link_url and not item.availability_label %}
                         <a
                             class="tf-asset__media-link"
                             href="{{ item.link_url|e('html_attr') }}"
@@ -37,7 +37,9 @@
                     <h3 class="tf-h3">{{ item.title }}</h3>
                     <p class="tf-endorse">{{ item.endorsement }}</p>
                     <p>{{ item.description|raw }}</p>
-                    {% if item.link_url and item.link_label %}
+                    {% if item.availability_label %}
+                        <p class="tf-availability">{{ item.availability_label }}</p>
+                    {% elseif item.link_url and item.link_label %}
                         <a class="tf-link" href="{{ item.link_url|e('html_attr') }}" {% if item.target_blank %}target="_blank" rel="noopener"{% endif %}>
                             {{ item.link_label }} <span aria-hidden="true">→</span>
                         </a>
