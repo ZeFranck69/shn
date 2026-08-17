@@ -554,7 +554,11 @@ p:last-child {
     radial-gradient(90% 80% at 80% 15%, rgba(132, 209, 191, 0.16), rgba(132, 209, 191, 0) 58%),
     linear-gradient(155deg, #06485a 0%, var(--tf-ocean) 54%, #022b36 100%);
   color: var(--tf-sable);
-  place-items: center;
+  align-items: center;
+}
+
+.tf-page-hero .tf-container {
+  width: 100%;
 }
 
 .tf-page-hero--compact {
@@ -566,8 +570,10 @@ p:last-child {
 }
 
 .tf-page-hero__content {
-  max-width: 760px;
+  width: 100%;
+  max-width: none;
   padding-block: clamp(3rem, 7vw, 5.5rem);
+  text-align: left;
 }
 
 .tf-page-hero .tf-eyebrow {
@@ -575,7 +581,7 @@ p:last-child {
 }
 
 .tf-page-hero h1 {
-  max-width: 13ch;
+  max-width: none;
   margin: 0;
   color: var(--tf-white);
   font-size: clamp(2.2rem, 5.2vw, 4.6rem);
@@ -1405,7 +1411,7 @@ p:last-child {
 }
 
 .tf-text-content__inner {
-  max-width: 760px;
+  max-width: none;
 }
 
 .tf-wysiwyg {
