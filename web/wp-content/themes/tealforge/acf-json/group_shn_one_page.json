@@ -596,10 +596,10 @@
             }
           ]
         },
-        "layout_shn_contact": {
+        "layout_shn_text_content": {
           "key": "layout_shn_text_content",
           "name": "text_content",
-          "label": "Contenu texte",
+          "label": "Contenu texte / légal",
           "display": "block",
           "sub_fields": [
             {
@@ -616,7 +616,7 @@
             },
             {
               "key": "field_shn_text_content_title",
-              "label": "Titre",
+              "label": "Titre de page",
               "name": "title",
               "type": "textarea",
               "new_lines": "br"
@@ -626,8 +626,8 @@
               "label": "Contenu",
               "name": "content",
               "type": "wysiwyg",
-              "tabs": "visual",
-              "toolbar": "basic",
+              "tabs": "all",
+              "toolbar": "full",
               "media_upload": 0
             }
           ]
@@ -732,5 +732,5 @@
   "active": true,
   "description": "",
   "show_in_rest": 0,
-  "modified": 1786942200
+  "modified": 1786943133
 }
