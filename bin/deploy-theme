@@ -1,11 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+
+cd "$PROJECT_ROOT"
+
 if [ -f "deploy.local.env" ]; then
-  set -a
-  # shellcheck disable=SC1091
-  source "deploy.local.env"
-  set +a
+  # shellcheck source=/dev/null
+  . "deploy.local.env"
 fi
 
 THEME_SLUG="${THEME_SLUG:-tealforge}"
@@ -60,14 +63,24 @@ mkdir "$THEME_SLUG-new"
 tar -xzf "/home/$DEPLOY_USER/$THEME_SLUG-theme.tar.gz" -C "$THEME_SLUG-new" --strip-components=1
 find "$THEME_SLUG-new" -type d -exec chmod 755 {} \;
 find "$THEME_SLUG-new" -type f -exec chmod 644 {} \;
-mv "$THEME_SLUG" "$THEME_SLUG-backup-temp"
+if [ -d "$THEME_SLUG" ]; then
+  mv "$THEME_SLUG" "$THEME_SLUG-backup-temp"
+fi
 mv "$THEME_SLUG-new" "$THEME_SLUG"
 rm -rf "$THEME_SLUG-backup-temp"
 cd "$DEPLOY_WP_PATH"
 wp theme activate "$THEME_SLUG"
+wp acf json status
+wp acf json sync --dry-run
+wp acf json sync
+wp rewrite flush --hard
 wp cache flush
 
 4. Verifier ensuite :
 
 $DEPLOY_WP_PATH/wp-content/themes/$THEME_SLUG/dist/manifest.json
+
+Verifier aussi dans l'admin WordPress que les champs ACF attendus sont visibles
+avant toute sauvegarde de page. Si des CPT ou taxonomies ACF ont ete ajoutes,
+la synchronisation JSON et le flush des permaliens sont obligatoires.
 COMMANDS

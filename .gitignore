@@ -24,6 +24,16 @@ web/wp-content/wpvivid_staging/
 web/wp-content/ai1wm-backups/
 web/wp-content/backups*/
 web/wp-content/debug.log
+web/wp-content/advanced-cache.php
+web/wp-content/aiowps_backups/
+web/wp-content/wpo-cache/
+web/wp-content/wpvividbackups/
+web/wp-content/plugins/*/
+web/.htaccess_old
+
+# DDEV local certificates and private keys
+.ddev/traefik/certs/
+*.key
 
 # Dependencies
 node_modules/
