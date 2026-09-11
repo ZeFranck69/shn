@@ -31,6 +31,15 @@ web/wp-content/wpvividbackups/
 web/wp-content/plugins/*/
 web/.htaccess_old
 
+# WordPress Core et extensions installees manuellement
+web/wp-admin/
+web/wp-includes/
+web/*.php
+web/license.txt
+web/readme.html
+web/wp-content/plugins/
+web/wp-content/languages/
+
 # DDEV local certificates and private keys
 .ddev/traefik/certs/
 *.key
