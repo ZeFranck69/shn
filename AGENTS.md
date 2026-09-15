@@ -89,6 +89,26 @@ Travailler uniquement sur la tâche explicitement demandée.
 Le développement doit avancer section par section à partir d'une maquette, d'une
 capture ou d'une demande validée.
 
+Avant de commencer à développer, même si la demande invite à coder directement :
+
+1. lire `PROJECT.md` et vérifier le dossier courant ainsi que le nom DDEV ;
+2. rechercher les groupes ACF JSON, les CPT, les taxonomies et les champs déjà
+   existants qui peuvent être concernés ;
+3. définir les nouveaux champs et contenus dans une fiche de modèle de données ;
+4. indiquer pour chaque élément son nom technique, son type, son emplacement,
+   son usage et son template prévu ;
+5. signaler les incohérences ou informations manquantes avant de créer un nouveau
+   champ, CPT ou taxonomie.
+
+Cette vérification est obligatoire pour Codex, Claude Code et tout autre agent IA.
+Un agent ne doit pas créer un champ ou un type de contenu uniquement parce que la
+demande ne précise pas encore le modèle de données.
+
+Toujours créer une page WordPress pour porter le contenu, même lorsqu'il s'agit
+d'une onepage. Le rendu doit être construit avec des sections administrables,
+principalement via ACF Flexible Content, et non comme une page statique codée en
+dur dans un template.
+
 Pour chaque tâche :
 
 1. analyser uniquement les fichiers utiles ;
@@ -318,11 +338,31 @@ views/
 └── sections/
 ```
 
+Responsabilités des dossiers :
+
+- `sections/` : bloc administrable ACF Flexible Content, généralement pleine
+  largeur et utilisé à un seul niveau dans une page ;
+- `components/` : brique réutilisable non administrable seule, comme un bouton,
+  une carte ou un badge ;
+- `partials/` : inclusion structurelle fixe, comme le header, le footer ou la
+  navigation ;
+- `pages/` : rendu Twig associé à une page ou à un template WordPress ;
+- `layouts/` : structure HTML globale partagée.
+
 ---
 
 ## 9. ACF Pro
 
-Les pages sont construites progressivement avec des sections ACF Flexible Content.
+Chaque page de contenu demandée doit exister comme une page WordPress et être
+composée avec le champ ACF Flexible Content principal, généralement
+`page_sections`. Cette règle s'applique aux sites one-page comme aux sites
+multipages : une one-page utilise une page WordPress contenant ses différentes
+sections ; un site avec une page Accueil et une page Contact utilise deux pages
+WordPress, chacune avec ses propres sections.
+
+Ne pas coder le contenu d'une page directement dans `front-page.php`, `page.php`
+ou un template Twig sans contenu administrable, sauf validation explicite. Pour
+l'accueil, créer la page WordPress et la définir comme page d'accueil statique.
 
 Champ principal recommandé :
 
@@ -332,13 +372,57 @@ page_sections
 
 Si un projet utilise un autre nom, l'indiquer dans `PROJECT.md`.
 
+### Fiche préalable des champs et contenus
+
+Avant toute création ou modification de modèle de contenu, documenter au minimum :
+
+```text
+Nom technique | Objet | Type | Emplacement | Obligatoire | Usage | Template
+```
+
+Exemples de types : `text`, `textarea`, `wysiwyg`, `image`, `url`, `link`,
+`true_false`, `select`, `relationship`, `repeater`, `flexible_content`, `CPT` ou
+`taxonomie`.
+
+Vérifier d'abord qu'un champ portant le même rôle n'existe pas déjà. Ne jamais
+renommer ou réutiliser un champ existant pour un autre usage sans migration
+validée.
+
+### Création et intégration d'une page ACF
+
+Pour chaque page de contenu demandée, qu'elle fasse partie d'un site one-page ou
+multipages :
+
+1. vérifier le dossier projet courant et le nom DDEV avant toute modification ;
+2. vérifier les champs et groupes ACF existants, puis créer la page WordPress si
+   elle n'existe pas ;
+3. définir la page comme page d'accueil statique si elle porte l'accueil ;
+4. créer ou synchroniser le groupe ACF JSON nécessaire ;
+5. ajouter dans la page les valeurs et layouts Flexible Content attendus, pas
+   seulement les définitions de champs ;
+6. vérifier pour chaque page que `get_field('page_sections', ID_PAGE)` retourne
+   les layouts attendus ;
+7. vérifier l'URL publique de chaque page et sa sauvegarde dans l'admin, sans
+   erreur REST JSON.
+
+Une page prévue dans la maquette ne doit pas être remplacée par une ancre ou une
+section d'une autre page si elle doit avoir sa propre URL et son propre contenu.
+
 Règles ACF :
 
 - utiliser des noms techniques stables en `snake_case` ;
 - ne pas renommer un champ existant après saisie de contenu sans migration ;
 - ne pas imbriquer plusieurs Flexible Content ;
 - éviter les répéteurs volumineux ou imbriqués ;
-- utiliser des Custom Post Types pour les collections importantes ;
+- utiliser un CPT lorsqu'au moins un critère s'applique :
+  - l'élément possède sa propre URL ou fiche ;
+  - il doit être filtrable, triable ou paginé ;
+  - il est référencé depuis plusieurs pages ;
+  - il possède des métadonnées SEO propres ;
+  - le nombre d'éléments peut dépasser une dizaine ou n'est pas fixé ;
+- utiliser un répéteur uniquement pour un contenu propre à une seule page, en
+  petit nombre et sans filtrage, tri ni lien individuel ;
+- en cas d'ambiguïté entre CPT et répéteur, demander confirmation avant de coder ;
 - mutualiser les réglages communs lorsque cela est pertinent ;
 - ne pas permettre la saisie libre de classes CSS ;
 - préférer des choix contrôlés pour les variantes visuelles ;
@@ -361,14 +445,59 @@ Après un déploiement qui modifie `acf-json` :
 1. vérifier la présence des fichiers JSON sur le serveur ;
 2. vérifier leurs permissions (`644` pour les fichiers, `755` pour les dossiers) ;
 3. supprimer les fichiers parasites `._*` ;
-4. synchroniser ou importer les groupes ACF avant d'éditer les pages ;
-5. ne jamais sauvegarder une page si des champs ACF attendus sont manquants.
+4. vérifier l'état de synchronisation avec `wp acf json status` ;
+5. prévisualiser la synchronisation avec `wp acf json sync --dry-run` ;
+6. synchroniser ou importer les groupes ACF avant d'éditer les pages ;
+7. si des CPT ou taxonomies ACF ont été ajoutés, synchroniser aussi les types
+   concernés puis relancer les règles de réécriture ;
+8. ne jamais sauvegarder une page si des champs ACF attendus sont manquants.
+
+### Création d'un CPT
+
+Lorsqu'un nouveau contenu mérite un CPT :
+
+1. vérifier dans `PROJECT.md` et dans le code qu'il n'existe pas déjà ;
+2. documenter son nom technique, son type, son slug, ses supports, ses taxonomies
+   et son exposition REST ;
+3. enregistrer le CPT dans `inc/post-types.php`, à créer uniquement si nécessaire ;
+4. créer le groupe ACF associé et sa règle d'emplacement dans `acf-json` ;
+5. créer `single-{cpt}.php`, `archive-{cpt}.php` et les vues Twig associées si le
+   contenu possède une URL publique ;
+6. vider les règles de réécriture ;
+7. vérifier l'affichage public, la sauvegarde dans l'administration et REST JSON.
+
+Pour un contenu destiné au filtrage, au tri ou au regroupement, utiliser une
+taxonomie WordPress plutôt qu'un champ ACF `select`, `checkbox` ou `radio`. Les
+champs ACF restent adaptés aux données d'affichage et aux propriétés propres à un
+contenu. En cas de doute sur le volume ou l'usage futur, demander confirmation.
+
+Commandes serveur recommandées après déploiement de JSON ACF :
+
+```bash
+wp acf json status
+wp acf json sync --dry-run
+wp acf json sync
+wp rewrite flush --hard
+wp cache flush
+```
+
+Lorsque seul un type précis est concerné, limiter la synchronisation :
+
+```bash
+wp acf json sync --type=field-group
+wp acf json sync --type=post-type
+wp acf json sync --type=taxonomy
+```
 
 ---
 
 ## 10. Structure d'une section
 
 Chaque section doit avoir une responsabilité claire.
+
+Pour chaque section, garder le template et ses styles dans des fichiers dédiés.
+Créer un fichier JavaScript dédié uniquement si la section a un comportement
+interactif.
 
 Exemple :
 
@@ -393,12 +522,34 @@ Chaque section doit prendre en compte :
 - comportement dans l'administration ACF.
 
 Ne développer que la section demandée.
+Lors d'une nouvelle section ou d'une modification ciblée, ne pas déplacer tout
+le CSS/JavaScript existant : appliquer cette organisation progressivement, sauf
+demande explicite de refactorisation.
 
 ---
 
 ## 11. CSS et BEM
 
 Utiliser BEM avec le préfixe `tf-`.
+
+Organisation des styles :
+
+- `assets/styles/main.css` est l'entrée globale Vite : tokens, reset, styles de
+  base, typographie et éléments communs au site ;
+- chaque section possède son propre fichier `assets/styles/sections/<section>.css` ;
+- les styles spécifiques d'une section ne doivent pas être ajoutés directement
+  dans `main.css` ; importer les fichiers de section depuis l'entrée globale pour
+  qu'ils soient inclus dans le build.
+
+Les tokens visuels doivent être déclarés dans :
+
+```text
+assets/styles/tokens.css
+```
+
+Les sections doivent réutiliser ces variables pour les couleurs, la typographie,
+les espacements et les dimensions communes. Ne pas coder ces valeurs en dur dans
+une section sans raison documentée.
 
 Exemple :
 
@@ -430,6 +581,19 @@ Règles :
 ## 12. JavaScript
 
 Utiliser JavaScript natif et modulaire par défaut.
+
+Organisation des scripts :
+
+- `assets/scripts/main.js` est l'entrée JavaScript Vite et charge `app.js` ;
+- `assets/scripts/app.js` contient l'initialisation et les comportements communs
+  au site ;
+- les comportements propres à une section vivent dans
+  `assets/scripts/sections/<section>.js` et sont chargés depuis l'entrée du site
+  uniquement lorsqu'ils sont utiles.
+
+Le build Vite peut regrouper ces sources en un seul fichier CSS et un seul fichier
+JavaScript de production : la séparation demandée concerne les fichiers source,
+pas nécessairement les fichiers livrés au navigateur.
 
 Règles :
 
@@ -530,6 +694,10 @@ Pour les images :
 - conserver le lazy loading hors élément principal ;
 - ne pas appliquer de lazy loading à l'image principale LCP ;
 - éviter d'afficher directement les fichiers originaux surdimensionnés.
+
+Pour les tailles d'image personnalisées, utiliser le préfixe `tealforge_` et les
+déclarer centralement dans `inc/setup.php`, par exemple `tealforge_card`,
+`tealforge_hero` et `tealforge_thumbnail`.
 
 ---
 
@@ -667,6 +835,11 @@ sur le poste hôte.
 Le boilerplate peut proposer des scripts simplifiés dans `bin/` ou `package.json`,
 mais les scripts doivent rester explicites et documentés dans `README.md`.
 
+La CI utilise `bin/ci-check`. Ce script ne dépend pas de DDEV : il vérifie
+`git diff --check`, la syntaxe PHP, les dépendances npm, le build Vite et la
+présence de `dist/manifest.json`. Il ne déploie rien et ne contacte aucun serveur
+distant.
+
 ---
 
 ## 20. Contrôles avant validation
@@ -682,6 +855,10 @@ Avant de considérer une tâche terminée :
 7. tester la section concernée en desktop et mobile lorsque pertinent ;
 8. vérifier les cas où les champs optionnels sont vides.
 
+Si un nouveau champ ACF, CPT ou taxonomie a été créé, vérifier également que son
+nom technique, son type, sa localisation et son usage correspondent à la fiche de
+modèle de données validée.
+
 Commande minimale :
 
 ```bash
@@ -695,6 +872,41 @@ ddev exec php -l /var/www/html/chemin/du/fichier.php
 ```
 
 Ne pas créer de commit sauf demande explicite.
+
+### CI
+
+La CI est un contrôle de qualité, pas un système de déploiement. Elle doit rester
+limitée aux vérifications reproductibles :
+
+- format du diff Git ;
+- syntaxe PHP du thème ;
+- installation propre des dépendances npm ;
+- build Vite ;
+- présence d'un manifest valide.
+
+Les tests dépendants d'une base de données, de plugins sous licence, de WPvivid,
+d'un serveur distant ou de données client restent des tests de recette. Ils ne
+doivent pas être ajoutés à la CI sans environnement de test dédié.
+
+La recette avant production doit suivre la checklist suivante :
+
+```text
+docs/checklists/recette-production.md
+```
+
+La CI verte ne suffit pas à valider une mise en production. La recette humaine
+doit aussi couvrir les contenus, les plugins, les comptes, les formulaires, les
+endpoints, la sécurité, le responsive, les emails, les caches et les assets.
+
+Les configurations fournies sont compatibles avec GitHub Actions et GitLab CI :
+
+```text
+.github/workflows/quality.yml
+.gitlab-ci.yml
+```
+
+Activer une seule plateforme CI par dépôt et ne jamais ajouter de secrets de
+production dans les variables CI pour cette vérification minimale.
 
 ---
 
@@ -726,6 +938,36 @@ bin/deploy-theme
 
 Le détail de ces scripts appartient au `README.md`.
 
+### Evolution du boilerplate
+
+Après l'initialisation d'un projet, son dépôt devient autonome. Une évolution du
+boilerplate ne doit jamais être fusionnée automatiquement dans un projet client.
+
+Pour étudier une mise à jour dans un projet existant :
+
+1. vérifier le statut du dépôt et identifier les modifications locales ;
+2. faire un backup si la base ou les médias ne sont pas récupérables ;
+3. ajouter le boilerplate comme remote secondaire nommé `boilerplate` ;
+4. exécuter `git fetch boilerplate` ;
+5. comparer les commits et uniquement les fichiers concernés ;
+6. créer une branche de test ;
+7. intégrer uniquement les commits autonomes et compatibles, généralement avec
+   `git cherry-pick` ;
+8. tester le build, PHP, ACF, les CPT, les taxonomies et les templates concernés ;
+9. faire relire puis merger dans `main` seulement après validation.
+
+Ne pas utiliser `git merge boilerplate/main` ou `git rebase boilerplate/main` sans
+analyse préalable. Une mise à jour qui modifie un champ ACF, un CPT, une taxonomie,
+une dépendance ou l'architecture du thème doit être accompagnée d'une migration et
+d'un backup. Les adaptations métier du projet client restent prioritaires sur le
+code générique du boilerplate.
+
+La procédure complète est documentée dans :
+
+```text
+docs/evolution-boilerplate.md
+```
+
 ---
 
 ## 22. Déploiement
@@ -754,8 +996,10 @@ Déploiement thème recommandé lorsque `rsync` n'est pas disponible :
 5. appliquer les permissions `755` pour les dossiers et `644` pour les fichiers ;
 6. remplacer le dossier actif en conservant le slug attendu ;
 7. réactiver le thème ;
-8. vider les caches ;
-9. vérifier `dist/manifest.json`.
+8. synchroniser les JSON ACF si des champs, CPT ou taxonomies ont changé ;
+9. relancer les règles de réécriture si des CPT ou taxonomies ont changé ;
+10. vider les caches ;
+11. vérifier `dist/manifest.json`.
 
 Ne pas laisser WordPress actif sur un dossier renommé du type :
 
@@ -774,8 +1018,11 @@ Après déploiement :
 - vérifier que le HTML charge `/themes/tealforge/dist/...` ;
 - vérifier que `dist/manifest.json` répond sans 403 ;
 - vérifier que les fichiers compilés répondent en 200 ;
+- exécuter `wp acf json status` et `wp acf json sync --dry-run` ;
+- synchroniser les JSON ACF si des champs, CPT ou taxonomies sont en attente ;
+- exécuter `wp rewrite flush --hard` si des CPT ou taxonomies ont changé ;
 - vider le cache WordPress et les caches de plugin ;
-- synchroniser/importer ACF JSON si nécessaire.
+- ne pas éditer une page tant que les champs ACF attendus ne sont pas visibles.
 
 Toute correction effectuée exceptionnellement sur un serveur distant doit être
 reportée dans le dépôt local.
