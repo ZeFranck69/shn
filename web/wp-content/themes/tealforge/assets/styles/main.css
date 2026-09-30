@@ -18,6 +18,7 @@
 
 :root {
   --tf-ocean: #033744;
+  --tf-footer: #022b36;
   --tf-ocean-90: rgba(3, 55, 68, 0.9);
   --tf-ocean-60: rgba(3, 55, 68, 0.6);
   --tf-ocean-30: rgba(3, 55, 68, 0.3);
@@ -268,6 +269,10 @@ p:last-child {
   border-bottom: 1px solid transparent;
   background: rgba(255, 255, 255, 0);
   transition: background var(--tf-duration) var(--tf-ease), border-color var(--tf-duration) var(--tf-ease), backdrop-filter var(--tf-duration) var(--tf-ease);
+}
+
+body.single-hebergement:not(.tf-menu-is-open) .tf-site-header:not(.is-scrolled) {
+  background: var(--tf-footer);
 }
 
 .tf-site-header.is-scrolled,
@@ -1464,7 +1469,7 @@ p:last-child {
 }
 
 .tf-site-footer {
-  background: #022b36;
+  background: var(--tf-footer);
   color: rgba(244, 236, 233, 0.72);
   padding-block: clamp(3rem, 6vw, 5rem) 1.4rem;
 }
